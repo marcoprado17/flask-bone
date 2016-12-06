@@ -13,4 +13,4 @@ app = Flask(__name__, instance_relative_config=True)
 app.config.from_object(default_flask_app_config)
 app.config.from_object(instance_flask_app_config)
 
-app.register_blueprint(home_blueprint)
+app.register_blueprint(home_blueprint, url_prefix="/home")
