@@ -35,8 +35,11 @@ then
     mkdir static
     cd static
     mkdir js
+    touch js/zzz_empty
     mkdir css
+    touch css/zzz_empty
     mkdir img
+    touch img/zzz_empty
     cd ..
     mkdir templates
     cd templates
@@ -92,11 +95,34 @@ def """${BLUEPRINT_NAME}"""():
     # url_arg_validators.py
     #
     touch url_arg_validators.py
+    touch url_arg_validators.py
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> url_arg_validators.py
 
 
+    #
+    # data_provider.py
+    #
+    touch data_provider.py
+    echo """#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+class """${BLUEPRINT_NAME^}"""DataProvider:
+    def __init__(self):
+        pass
+
+    def get_data(self):
+        return {
+
+        }
+
+
+"""${BLUEPRINT_NAME}"""_data_provider = """${BLUEPRINT_NAME^}"""DataProvider()""" >> data_provider.py
+
+
     echo "New blueprint module created"
+    echo "WARNING!!! Mark the created template directory as template directory"
     echo "WARNING!!! Don't forget to register the blueprint with an url prefix (to use blueprint static folder it's necessary define the url prefix)"
 else
     echo ${ABORTED_MSG}
