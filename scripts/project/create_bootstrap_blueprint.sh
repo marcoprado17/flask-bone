@@ -22,3 +22,23 @@ mkdir css;
 cp ${FLASK_PROJECT_ROOT}/bower_components/bootstrap/dist/css/bootstrap.css ${BLUEPRINT_ROOT}/${BLUEPRINT_NAME}/static/css
 mkdir fonts;
 cp -a ${FLASK_PROJECT_ROOT}/bower_components/bootstrap/dist/fonts/. ${BLUEPRINT_ROOT}/${BLUEPRINT_NAME}/static/fonts
+cd ..
+
+#
+    # __init__.py
+    #
+    touch __init__.py;
+    echo """#!/usr/bin/env python
+# -*- coding: utf-8 -*-""" >> __init__.py;
+
+
+    #
+    # views.py
+    #
+    touch views.py;
+    echo """#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from flask import Blueprint
+
+"""${BLUEPRINT_NAME}"""_blueprint = Blueprint(\""""${BLUEPRINT_NAME}"""\", __name__, static_folder=\"static\", template_folder=\"templates\")""" >> views.py;
