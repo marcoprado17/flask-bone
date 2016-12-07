@@ -34,6 +34,8 @@ then
     touch css/zzz_empty
     mkdir img
     touch img/zzz_empty
+    mkdir fonts
+    touch fonts/zzz_empty
     cd ..
     mkdir templates
     cd templates
