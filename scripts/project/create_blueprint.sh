@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
 
-ABORTED_MSG="Creation of blueprint module aborted"
-BLUEPRINT_ROOT=${BLUEPRINT_ROOT}
 
-echo "To define/change the environment variable BLUEPRINT_ROOT, use: export BLUEPRINT_ROOT=<path/to/blueprint/directory>"
 
-if [[ -n ${BLUEPRINT_ROOT} ]]
+if ! [[ -n ${FLASK_PROJECT_ROOT} ]]
 then
-    echo "BLUEPRINT_ROOT=""${BLUEPRINT_ROOT}"
-else
-    echo "Environment variable BLUEPRINT_ROOT must be defined"
-    echo ${ABORTED_MSG}
+    echo "Run .../scripts/project/setup.sh first! If you already run it, restart your bash session to apply the changes."
     exit
 fi
 
+BLUEPRINT_ROOT=${FLASK_PROJECT_ROOT}/src/blueprints
 BLUEPRINT_NAME="$1"
 
 if ! [[ -n ${BLUEPRINT_NAME} ]]
@@ -22,8 +17,7 @@ then
     read BLUEPRINT_NAME
 fi
 
-echo "BLUEPRINT_NAME="${BLUEPRINT_NAME}
-echo "The blueprint module will be created at ""<${BLUEPRINT_ROOT}>"" with the name <"${BLUEPRINT_NAME}">"
+echo "The blueprint will be created at ""<${BLUEPRINT_ROOT}>"" with the name <"${BLUEPRINT_NAME}">."
 
 read -p "Are you sure? Press Y or y to continue: " -n 1 -r
 echo
@@ -95,7 +89,6 @@ def """${BLUEPRINT_NAME}"""():
     # url_arg_validators.py
     #
     touch url_arg_validators.py
-    touch url_arg_validators.py
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> url_arg_validators.py
 
@@ -121,9 +114,9 @@ class """${BLUEPRINT_NAME^}"""DataProvider:
 """${BLUEPRINT_NAME}"""_data_provider = """${BLUEPRINT_NAME^}"""DataProvider()""" >> data_provider.py
 
 
-    echo "New blueprint module created"
-    echo "WARNING!!! Mark the created template directory as template directory"
-    echo "WARNING!!! Don't forget to register the blueprint with an url prefix (to use blueprint static folder it's necessary define the url prefix)"
+    echo "New blueprint created."
+    echo -e "\e[93mWARNING!!! Don't forget to mark the template directory."
+    echo -e "\e[93mWARNING!!! Don't forget to register the blueprint in .../src/__init__.py with an url prefix (to use blueprint static folder it's necessary define the url prefix).\e[0m"
 else
-    echo ${ABORTED_MSG}
+    echo "Creation of blueprint aborted."
 fi
