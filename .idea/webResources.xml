@@ -7,6 +7,8 @@
           <resourceRoots>
             <path value="file://$PROJECT_DIR$/src/blueprints/home/static" />
             <path value="file://$PROJECT_DIR$/src/blueprints/login/static" />
+            <path value="file://$PROJECT_DIR$/bower_components/bootstrap/dist" />
+            <path value="file://$PROJECT_DIR$/bower_components/jquery/dist" />
           </resourceRoots>
         </entryData>
       </entry>

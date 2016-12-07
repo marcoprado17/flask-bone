@@ -29,13 +29,13 @@ then
     mkdir static
     cd static
     mkdir js
-    touch js/zzz_empty
+    touch js/zzz_empty.js
     mkdir css
-    touch css/zzz_empty
+    touch css/zzz_empty.css
     mkdir img
-    touch img/zzz_empty
+    touch img/zzz_empty.png
     mkdir fonts
-    touch fonts/zzz_empty
+    touch fonts/zzz_empty.ttf
     cd ..
     mkdir templates
     cd templates
@@ -66,7 +66,7 @@ from flask import Blueprint, render_template
 """${BLUEPRINT_NAME}"""_blueprint = Blueprint(\""""${BLUEPRINT_NAME}"""\", __name__, static_folder=\"static\", template_folder=\"templates\")
 
 
-@"""${BLUEPRINT_NAME}"""_blueprint.route(\"route-suffix\")
+@"""${BLUEPRINT_NAME}"""_blueprint.route()
 def """${BLUEPRINT_NAME}"""():
     return render_template(\""""${BLUEPRINT_NAME}"""/"""${BLUEPRINT_NAME}""".html\")""" >> views.py
 
