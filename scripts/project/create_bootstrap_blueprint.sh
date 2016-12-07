@@ -24,9 +24,10 @@ mkdir fonts;
 cp -a ${FLASK_PROJECT_ROOT}/bower_components/bootstrap/dist/fonts/. ${BLUEPRINT_ROOT}/${BLUEPRINT_NAME}/static/fonts
 cd ..
 
-#
+    #
     # __init__.py
     #
+    rm __init__.py;
     touch __init__.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> __init__.py;
@@ -35,6 +36,7 @@ cd ..
     #
     # views.py
     #
+    rm views.py;
     touch views.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-
