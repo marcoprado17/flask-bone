@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-echo "ABSOLUTE_PATH = "${ABSOLUTE_PATH};
-
 confirm_project_root.sh -y;
 RESULT=$?
 if [[ ${RESULT} -ne 0 ]]
@@ -69,7 +66,7 @@ then
     cd templates;
     mkdir ${BLUEPRINT_NAME};
     cd ${BLUEPRINT_NAME};
-    rm ${BLUEPRINT_NAME}.html;
+    rm -f ${BLUEPRINT_NAME}.html;
     touch ${BLUEPRINT_NAME}.html;
     echo "<p>Welcome to "${BLUEPRINT_NAME}"!</p>" >> ${BLUEPRINT_NAME}.html;
     cd ../..;
@@ -78,7 +75,7 @@ then
     #
     # __init__.py
     #
-    rm __init__.py;
+    rm -f __init__.py;
     touch __init__.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> __init__.py;
@@ -87,7 +84,7 @@ then
     #
     # views.py
     #
-    rm views.py;
+    rm -f views.py;
     touch views.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -105,7 +102,7 @@ def """${BLUEPRINT_NAME}"""():
     #
     # forms.py
     #
-    rm forms.py;
+    rm -f forms.py;
     touch forms.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> forms.py;
@@ -114,7 +111,7 @@ def """${BLUEPRINT_NAME}"""():
     #
     # field_validators.py
     #
-    rm field_validators.py;
+    rm -f field_validators.py;
     touch field_validators.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> field_validators.py;
@@ -123,7 +120,7 @@ def """${BLUEPRINT_NAME}"""():
     #
     # url_arg_validators.py
     #
-    rm url_arg_validators.py;
+    rm -f url_arg_validators.py;
     touch url_arg_validators.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> url_arg_validators.py;
@@ -132,7 +129,7 @@ def """${BLUEPRINT_NAME}"""():
     #
     # data_provider.py
     #
-    rm data_provider.py;
+    rm -f data_provider.py;
     touch data_provider.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-

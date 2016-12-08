@@ -10,7 +10,7 @@ fi
 
 echo "export FLASK_PROJECT_ROOT="${FLASK_PROJECT_ROOT}>>~/.bashrc;
 echo "export PATH=\$PATH:"${FLASK_PROJECT_ROOT}/scripts>>~/.bashrc;
-echo "export PATH=\$PATH:"${FLASK_PROJECT_ROOT}/scripts/project>>~/.bashrc;
+echo "export PATH=\$PATH:"${FLASK_PROJECT_ROOT}/scripts/project/development>>~/.bashrc;
 echo "export PATH=\$PATH:"${FLASK_PROJECT_ROOT}/scripts/server_setups>>~/.bashrc;
 echo "export PATH=\$PATH:"${FLASK_PROJECT_ROOT}/scripts/start_server>>~/.bashrc;
 

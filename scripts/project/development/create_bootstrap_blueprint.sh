@@ -27,7 +27,7 @@ cd ..
     #
     # __init__.py
     #
-    rm __init__.py;
+    rm -f __init__.py;
     touch __init__.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-""" >> __init__.py;
@@ -36,7 +36,7 @@ cd ..
     #
     # views.py
     #
-    rm views.py;
+    rm -f views.py;
     touch views.py;
     echo """#!/usr/bin/env python
 # -*- coding: utf-8 -*-
@@ -44,3 +44,5 @@ cd ..
 from flask import Blueprint
 
 """${BLUEPRINT_NAME}"""_blueprint = Blueprint(\""""${BLUEPRINT_NAME}"""\", __name__, static_folder=\"static\", template_folder=\"templates\")""" >> views.py;
+
+    echo "Bootstrap blueprint created."
