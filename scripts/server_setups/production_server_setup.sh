@@ -20,3 +20,10 @@ sudo rm /etc/nginx/sites-enabled/src;
 sudo cp /vagrant/configs/ngix_config /etc/nginx/sites-available/src;
 sudo ln -s /etc/nginx/sites-available/src /etc/nginx/sites-enabled/src;
 sudo /etc/init.d/nginx restart;
+
+sudo apt-get install -y nodejs;
+sudo apt-get install -y nodejs-legacy;
+sudo apt-get install -y build-essential;
+sudo apt-get install -y npm;
+npm install -g bower;
+bower --allow-root install;
