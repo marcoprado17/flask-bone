@@ -7,11 +7,11 @@
   "description": "Pycharm project bone for large Flask web applications",
   "main": "",
   "keywords": [
-    "[\"pycharm\"",
-    "\"flask\"",
-    "\"large",
+    "pycharm",
+    "flask",
+    "large",
     "web",
-    "apps\"]"
+    "apps"
   ],
   "license": "MIT",
   "ignore": [

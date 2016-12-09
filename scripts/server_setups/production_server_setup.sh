@@ -9,6 +9,7 @@ chmod -x ${SHARED_SERVER_SETUP_FULL_PATH};
 sudo mkdir /vagrant/instance;
 sudo touch /vagrant/instance/config.py;
 echo "DEBUG=False" >> /vagrant/instance/config.py;
+echo "STATIC_FOLDER='/vagrant/build/static'" >> /vagrant/instance/config.py;
 
 sudo apt-get install -y python nginx gunicorn;
 sudo /etc/init.d/nginx start;

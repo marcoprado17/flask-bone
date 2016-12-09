@@ -2,3 +2,4 @@
 # -*- coding: utf-8 -*-
 
 DEBUG = True
+STATIC_FOLDER=None

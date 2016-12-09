@@ -3,4 +3,4 @@
 
 from flask import Blueprint
 
-shared_blueprint = Blueprint("base", __name__, static_folder="static", template_folder="templates")
+base_blueprint = Blueprint("base", __name__, static_folder="static", template_folder="templates")
