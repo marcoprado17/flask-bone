@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import url_for, g
 
-from blueprints.components.lightly_route_dependent.navbar.r import R
+from src.blueprints.components.lightly_route_dependent.navbar.r import R
 
 
 class NavbarData:

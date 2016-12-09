@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from app_factory import create_app
+from src.app_factory import create_app
 from configs import default_app_config
 from configs.instance import instance_app_config
 

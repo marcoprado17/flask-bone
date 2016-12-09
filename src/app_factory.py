@@ -22,22 +22,22 @@ def create_app(default_app_config, instance_app_config):
         return redirect("home")
 
     # Registering blueprints
-    from blueprints.routers.home.views import home_blueprint
+    from src.blueprints.routers.home.views import home_blueprint
     app.register_blueprint(home_blueprint, url_prefix="/home")
-    from blueprints.wrappers.base.views import base_blueprint
+    from src.blueprints.wrappers.base.views import base_blueprint
     app.register_blueprint(base_blueprint, url_prefix="/base")
-    from blueprints.components.lightly_route_dependent.navbar.views import navbar_blueprint
+    from src.blueprints.components.lightly_route_dependent.navbar.views import navbar_blueprint
     app.register_blueprint(navbar_blueprint, url_prefix="/navbar")
 
     # Registering jinja filters
-    from flask_bombril.jinja.filters import assert_defined, assert_callable, call, if_filter
+    from src.flask_bombril.jinja.filters import assert_defined, assert_callable, call, if_filter
     app.jinja_env.filters['assert_defined'] = assert_defined
     app.jinja_env.filters['assert_callable'] = assert_callable
     app.jinja_env.filters['call'] = call
     app.jinja_env.filters['if'] = if_filter
 
     # Registering lightly route dependent components context_processors
-    from blueprints.components.lightly_route_dependent.navbar.data import NavbarData
+    from src.blueprints.components.lightly_route_dependent.navbar.data import NavbarData
 
     @app.context_processor
     def _():
