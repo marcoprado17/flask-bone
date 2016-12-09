@@ -1,2 +1,4 @@
 .vagrant/
 bower_components/
+*.pyc
+configs/instance/
