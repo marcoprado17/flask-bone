@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template, g
-
 from src.blueprints.components.lightly_route_dependent.navbar.r import navbar_R
 
 home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")

@@ -24,9 +24,9 @@ def create_app(default_app_config, instance_app_config):
     # Registering blueprints
     from src.blueprints.routers.home.views import home_blueprint
     app.register_blueprint(home_blueprint, url_prefix="/home")
-    from src.blueprints.wrappers.base.views import base_blueprint
+    from src.blueprints.wrappers.base import base_blueprint
     app.register_blueprint(base_blueprint, url_prefix="/base")
-    from src.blueprints.components.lightly_route_dependent.navbar.views import navbar_blueprint
+    from src.blueprints.components.lightly_route_dependent.navbar import navbar_blueprint
     app.register_blueprint(navbar_blueprint, url_prefix="/navbar")
 
     # Registering jinja filters
