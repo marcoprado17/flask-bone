@@ -6,10 +6,8 @@ class HomeDataProvider:
     def __init__(self):
         pass
 
-    def get_data(self):
+    @staticmethod
+    def get_data():
         return {
 
         }
-
-
-home_data_provider = HomeDataProvider()

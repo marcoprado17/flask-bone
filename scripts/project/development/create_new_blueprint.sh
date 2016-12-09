@@ -139,13 +139,11 @@ class """${BLUEPRINT_NAME^}"""DataProvider:
     def __init__(self):
         pass
 
-    def get_data(self):
+    @staticmethod
+    def get_data():
         return {
 
-        }
-
-
-"""${BLUEPRINT_NAME}"""_data_provider = """${BLUEPRINT_NAME^}"""DataProvider()""" >> data_provider.py;
+        }""" >> data_provider.py;
 
 
     echo "New blueprint created.";

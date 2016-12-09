@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/bower_components" />
     </content>
     <orderEntry type="jdk" jdkName="Remote Python 2.7.6 Vagrant VM at ~/PycharmProjects/flask-bone (/usr/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -13,6 +14,7 @@
       <list>
         <option value="$MODULE_DIR$/src/blueprints/home/templates" />
         <option value="$MODULE_DIR$/src/blueprints/shared/templates" />
+        <option value="$MODULE_DIR$/src/blueprints/navbar/templates" />
       </list>
     </option>
   </component>

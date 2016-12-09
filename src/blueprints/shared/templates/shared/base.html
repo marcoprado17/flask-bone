@@ -15,8 +15,13 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('bootstrap.static', filename='css/bootstrap.css') }}">
 </head>
 <body>
-{% block content %}
-{% endblock %}
+
+{% include "navbar/navbar.html" %}
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
 
 <script type="text/javascript" src="{{ url_for('jquery.static', filename='js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('bootstrap.static', filename='js/bootstrap.js') }}"></script>
