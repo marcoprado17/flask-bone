@@ -6,16 +6,16 @@ chmod +x ${SHARED_SERVER_SETUP_FULL_PATH};
 $SHARED_SERVER_SETUP_FULL_PATH;
 chmod -x ${SHARED_SERVER_SETUP_FULL_PATH};
 
-sudo mkdir /vagrant/instance;
-sudo touch /vagrant/instance/config.py;
-echo "DEBUG=False" >> /vagrant/instance/config.py;
-echo "STATIC_FOLDER='/vagrant/build/static'" >> /vagrant/instance/config.py;
+sudo mkdir /vagrant/configs/instance;
+sudo touch /vagrant/configs/instance/config.py;
+echo "DEBUG=False" >> /vagrant/configs/instance/config.py;
+echo "STATIC_FOLDER=None" >> /vagrant/configs/instance/config.py;
 
 sudo apt-get install -y python nginx gunicorn;
 sudo /etc/init.d/nginx start;
 sudo rm /etc/nginx/sites-enabled/default;
-sudo rm /etc/nginx/sites-available/build;
-sudo rm /etc/nginx/sites-enabled/build;
-sudo cp /vagrant/configs/ngix_config /etc/nginx/sites-available/build;
-sudo ln -s /etc/nginx/sites-available/build /etc/nginx/sites-enabled/build;
+sudo rm /etc/nginx/sites-available/src;
+sudo rm /etc/nginx/sites-enabled/src;
+sudo cp /vagrant/configs/ngix_config /etc/nginx/sites-available/src;
+sudo ln -s /etc/nginx/sites-available/src /etc/nginx/sites-enabled/src;
 sudo /etc/init.d/nginx restart;
