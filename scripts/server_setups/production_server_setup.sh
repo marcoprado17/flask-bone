@@ -7,7 +7,8 @@ $SHARED_SERVER_SETUP_FULL_PATH;
 chmod -x ${SHARED_SERVER_SETUP_FULL_PATH};
 
 sudo mkdir /vagrant/configs/instance;
-sudo touch /vagrant/configs/instance/config.py;
+sudo touch /vagrant/configs/instance/instance_app_config.py;
+sudo touch /vagrant/configs/instance/__init__.py;
 echo "DEBUG=False" >> /vagrant/configs/instance/instance_app_config.py.py;
 echo "STATIC_FOLDER=None" >> /vagrant/configs/instance/instance_app_config.py.py;
 
