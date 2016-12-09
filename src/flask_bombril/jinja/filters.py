@@ -17,7 +17,7 @@ def call(func, *args, **kwargs):
     return func(*args, **kwargs)
 
 
-def if_filter(value, condition, default):
+def if_filter(value, condition, else_value):
     if condition:
         return value
-    return default
+    return else_value

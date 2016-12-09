@@ -3,8 +3,7 @@
 
 from flask import Blueprint, render_template, g
 
-from blueprints.navbar.data_provider import NavbarDataProvider
-from blueprints.navbar.r import navbar_R
+from blueprints.components.lightly_route_dependent.navbar.r import navbar_R
 
 home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 

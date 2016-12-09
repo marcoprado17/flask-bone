@@ -127,7 +127,7 @@ def """${BLUEPRINT_NAME}"""():
 
 
     #
-    # data_provider.py
+    # data.py
     #
     rm -f data_provider.py;
     touch data_provider.py;
