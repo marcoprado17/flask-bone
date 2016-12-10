@@ -1,0 +1,5 @@
+/* TODO: Create pycharm template for css files creation */
+/* TODO: When a css file is created or edited, concatenate all css files in a single file (Grunt! Uhu). */
+.navbar.template .li.right {
+    float: right;
+}
