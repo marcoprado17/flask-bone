@@ -7,6 +7,7 @@ var shell = require("gulp-shell");
 gulp.task("watch", function () {
     gulp.watch("src/**/*.scss", ["make_css_bundle"]);
     gulp.watch("src/**/*.js", ["make_js_bundle"]);
+    gulp.watch("src/**/*.html", ["refresh_page"]);
     gulp.watch("static/**/*.*", ["refresh_page"]);
 });
 
