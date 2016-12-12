@@ -20,18 +20,33 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from src.app_factory import create_app
+from flask import url_for, g
 
-if __name__ == "__main__":
-    from configs import default_app_config
-    from configs.instance import instance_app_config
+from build.blueprints.components.lightly_route_dependent.navbar.r import R
 
-    app = create_app(
-        default_app_config=default_app_config,
-        instance_app_config=instance_app_config
-    )
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True
-    )
+# TODO: After implement user management and user permissions, provide navbar data according to the user in question
+
+
+class NavbarData:
+    def __init__(self):
+        self.title = R.string.micro_blog
+        self.left_items = [
+            NavbarItemData(R.string.home, url_for("home.index"), self.is_active(R.id.home)),
+            # TODO: Add correct href after declaring the blueprints
+            NavbarItemData(R.string.posts, "#", self.is_active(R.id.posts)),
+        ]
+        self.right_items = [
+            NavbarItemData(R.string.enter, "#"),
+            NavbarItemData(R.string.register, "#"),
+        ]
+
+    # noinspection PyMethodMayBeStatic
+    def is_active(self, id_):
+        return True if id_ == g.active_navbar_item_id else False
+
+
+class NavbarItemData:
+    def __init__(self, text, href, active=False):
+        self.text = text
+        self.href = href
+        self.active = active

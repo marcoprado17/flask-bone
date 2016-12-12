@@ -6427,16 +6427,16 @@ button.close {
 
 /*# sourceMappingURL=bootstrap.css.map */
 
-.p {
-  font-size: 12px; }
-
 .__home__ .modal-title {
   color: red; }
 
 .__home__ h2 {
-  color: green; }
+  color: goldenrod; }
 
 /* TODO: Create pycharm template for scss files creation */
 /* TODO: When a css file is created or edited, concatenate all css files in a single file (Gulp! Uhu). */
 .__navbar__ li.right {
   float: right; }
+
+.p {
+  font-size: 12px; }

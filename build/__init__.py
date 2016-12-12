@@ -19,19 +19,3 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGE
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from src.app_factory import create_app
-
-if __name__ == "__main__":
-    from configs import default_app_config
-    from configs.instance import instance_app_config
-
-    app = create_app(
-        default_app_config=default_app_config,
-        instance_app_config=instance_app_config
-    )
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True
-    )

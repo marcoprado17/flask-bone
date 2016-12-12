@@ -20,18 +20,35 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from src.app_factory import create_app
+# TODO: Update r.py template
 
-if __name__ == "__main__":
-    from configs import default_app_config
-    from configs.instance import instance_app_config
 
-    app = create_app(
-        default_app_config=default_app_config,
-        instance_app_config=instance_app_config
-    )
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True
-    )
+class NavbarResources:
+    def __init__(self):
+        self.string = self.__Strings()
+        self.id = self.__Ids()
+
+    class __Strings:
+        def __init__(self):
+            self.micro_blog = "Micro Blog"
+            self.home = "Home"
+            self.posts = "Posts"
+            self.add_post = "Adicionar Post"
+            self.view_posts = "Visualizar Posts"
+            self.categories = "Categorias"
+            self.add_category = "Adicionar Categoria"
+            self.subcategories = "Subcategorias"
+            self.add_subcategory = "Adicionar Subcategoria"
+            self.enter = "Entrar"
+            self.register = "Cadastrar"
+            self.leave = "Sair"
+
+    class __Ids:
+        def __init__(self):
+            self.home = "home"
+            self.posts = "posts"
+            self.categories = "categories"
+            self.subcategories = "subcategories"
+
+R = NavbarResources()
+navbar_R = NavbarResources()

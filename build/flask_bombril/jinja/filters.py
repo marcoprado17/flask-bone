@@ -20,18 +20,24 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from src.app_factory import create_app
+from jinja2.runtime import Undefined
 
-if __name__ == "__main__":
-    from configs import default_app_config
-    from configs.instance import instance_app_config
 
-    app = create_app(
-        default_app_config=default_app_config,
-        instance_app_config=instance_app_config
-    )
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True
-    )
+def assert_defined(value):
+    assert not isinstance(value, Undefined)
+    return value
+
+
+def assert_callable(value):
+    assert callable(value)
+    return value
+
+
+def call(func, *args, **kwargs):
+    return func(*args, **kwargs)
+
+
+def if_filter(value, condition, else_value):
+    if condition:
+        return value
+    return else_value

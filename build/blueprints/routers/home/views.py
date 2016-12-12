@@ -20,18 +20,13 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER I
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from src.app_factory import create_app
+from flask import Blueprint, render_template, g
+from build.blueprints.components.lightly_route_dependent.navbar.r import navbar_R
 
-if __name__ == "__main__":
-    from configs import default_app_config
-    from configs.instance import instance_app_config
+home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 
-    app = create_app(
-        default_app_config=default_app_config,
-        instance_app_config=instance_app_config
-    )
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=True
-    )
+
+@home_blueprint.route("/")
+def index():
+    g.active_navbar_item_id = navbar_R.id.home
+    return render_template("home/home.html")

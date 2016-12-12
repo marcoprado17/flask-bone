@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
     <title>
-        {% block title %}{% endblock %}<!--removeIf(production)-->#e11aeca0e7e00447b2d72d96cd55c32b4273ad29f1f2b48ae73d692475825979<!--endRemoveIf(production)-->
+        {% block title %}{% endblock %}
     </title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +12,7 @@
     <link rel="icon" href="#" type="image/x-icon">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bundle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bundle.min.css') }}">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
     {% endblock %}
 </div>
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bundle.min.js') }}"></script>
 {% block scripts %}
 {% endblock %}
 </body>

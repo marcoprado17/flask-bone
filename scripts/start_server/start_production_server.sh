@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd /vagrant;
-gunicorn src.wsgi:app -b localhost:8000;
+gunicorn build.wsgi:app -b localhost:8000;
