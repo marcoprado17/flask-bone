@@ -6,7 +6,13 @@ Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 ========================================================================================================================
 */
 .__navbar__ {
-    li.right {
-        float: right;
+    @media (min-width: 768px) {
+        li.right {
+            float: right;
+        }
+
+        ul.nav.navbar-nav {
+            float: none;
+        }
     }
 }
