@@ -8,7 +8,7 @@
 
 from flask import url_for, g
 
-from src.blueprints.components.lightly_route_dependent.navbar.r import R
+from build.blueprints.components.lightly_route_dependent.navbar.r import R
 
 # TODO: After implement user management and user permissions, provide navbar data according to the user in question
 
@@ -22,8 +22,8 @@ class NavbarData:
             NavbarItemData(R.string.posts, "#", self.is_active(R.id.posts)),
         ]
         self.right_items = [
-            NavbarItemData(R.string.login, "#", self.is_active(R.id.login)),
-            NavbarItemData(R.string.register, url_for("register.index"), self.is_active(R.id.register)),
+            NavbarItemData(R.string.enter, "#"),
+            NavbarItemData(R.string.register, "#"),
         ]
 
     # noinspection PyMethodMayBeStatic

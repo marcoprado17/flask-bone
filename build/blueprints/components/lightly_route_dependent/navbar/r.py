@@ -23,7 +23,7 @@ class NavbarResources:
             self.add_category = "Adicionar Categoria"
             self.subcategories = "Subcategorias"
             self.add_subcategory = "Adicionar Subcategoria"
-            self.login = "Entrar"
+            self.enter = "Entrar"
             self.register = "Cadastrar"
             self.leave = "Sair"
 
@@ -33,8 +33,6 @@ class NavbarResources:
             self.posts = "posts"
             self.categories = "categories"
             self.subcategories = "subcategories"
-            self.register = "register"
-            self.login = "login"
 
 R = NavbarResources()
 navbar_R = NavbarResources()

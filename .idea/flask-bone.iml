@@ -11,9 +11,10 @@
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/src/blueprints/home/templates" />
-        <option value="$MODULE_DIR$/src/blueprints/shared/templates" />
-        <option value="$MODULE_DIR$/src/blueprints/navbar/templates" />
+        <option value="$MODULE_DIR$/src/blueprints/routers/home/templates" />
+        <option value="$MODULE_DIR$/src/blueprints/wrappers/base/templates" />
+        <option value="$MODULE_DIR$/src/blueprints/components/lightly_route_dependent/navbar/templates" />
+        <option value="$MODULE_DIR$/src/blueprints/routers/register/templates" />
       </list>
     </option>
   </component>

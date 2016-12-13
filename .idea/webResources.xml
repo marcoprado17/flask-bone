@@ -10,6 +10,7 @@
             <path value="file://$PROJECT_DIR$/bower_components/bootstrap/dist" />
             <path value="file://$PROJECT_DIR$/bower_components/jquery/dist" />
             <path value="file://$PROJECT_DIR$/src/blueprints/bootstrap/static" />
+            <path value="file://$PROJECT_DIR$/src/blueprints/routers/register/static" />
           </resourceRoots>
         </entryData>
       </entry>
