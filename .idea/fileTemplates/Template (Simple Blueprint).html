@@ -1,0 +1,5 @@
+#parse("header-html.html")
+{% set data = get_${BLUEPRINT_NAME}_data|assert_defined|assert_callable|call %}
+<div class="__${BLUEPRINT_NAME}__">
+    
+</div>
