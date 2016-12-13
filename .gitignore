@@ -3,3 +3,5 @@ bower_components/
 *.pyc
 configs/instance/
 node_modules/
+/logs/*
+!/logs/.gitkeep
