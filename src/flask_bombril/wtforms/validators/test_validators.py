@@ -8,7 +8,6 @@
 from pprint import pprint
 from unittest import TestCase
 
-from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import Field, StringField
@@ -16,14 +15,9 @@ from wtforms import ValidationError
 
 from flask_bombril.r import R
 from flask_bombril.wtforms.validators.validators import Required, Email, Unique
-
-app = Flask(__name__)
-app.config["WTF_CSRF_ENABLED"] = False
-# TODO: Create an test database
-# app.config["SQLALCHEMY_DATABASE_URI"] = "???"
+from wsgi import test_app as app
 
 db = SQLAlchemy(app)
-
 
 class User(db.Model):
     email = db.Column(db.String(256), primary_key=True, unique=True)
@@ -165,3 +159,8 @@ class TestValidators(TestCase):
             email_mock_form = EmailMockFormStopFalseWithAlwaysError()
             self.assertFalse(email_mock_form.validate_on_submit())
             self.assertEqual(len(email_mock_form.email.errors), 2)
+
+    def test_unique(self):
+        with app.test_client() as c:
+            db.create_all()
+

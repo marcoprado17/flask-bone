@@ -21,3 +21,10 @@ def create_app(default_app_config, instance_app_config):
     app.config.from_object(instance_app_config)
 
     return app
+
+
+def create_test_app(default_app_config, instance_app_config):
+    app = create_app(default_app_config=default_app_config, instance_app_config=instance_app_config)
+    app.config["WTF_CSRF_ENABLED"] = False
+    app.config["SQLALCHEMY_DATABASE_URI"] = app.config["SQLALCHEMY_TEST_DATABASE_URI"]
+    return app
