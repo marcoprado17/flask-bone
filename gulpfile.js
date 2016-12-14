@@ -60,8 +60,8 @@ gulp.task("copy_html_files_to_build_dir", function () {
 
 gulp.task("copy_py_files_to_build_dir", function () {
     return gulp.src(["src/**/*.py"])
-        .pipe(replace(/from\s+src\./g, "from build."))
-        .pipe(replace(/import\s+src\./g, "import build."))
+        .pipe(replace(/from\s+src/g, "from build"))
+        .pipe(replace(/import\s+src/g, "import build"))
         .pipe(gulp.dest("build"));
 });
 
