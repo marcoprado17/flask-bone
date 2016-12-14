@@ -9,9 +9,14 @@ import gettext
 import re
 from wtforms.validators import InputRequired, Regexp, HostnameValidation, ValidationError, StopValidation
 
-from flask.ext.bombril.exceptions import InvalidFieldError
-from flask.ext.bombril.r import R
+from flask_bombril.exceptions import InvalidFieldError
+from flask_bombril.r import R
 
+def raise_with_stop(validator):
+    if validator.stop:
+        raise StopValidation(validator.message)
+    else:
+        raise ValidationError(validator.message)
 
 class Required(InputRequired):
     def __init__(self):
@@ -26,22 +31,15 @@ class Email(Regexp):
         self.validate_hostname = HostnameValidation(
             require_tld=True,
         )
-        super(Email, self).__init__(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", re.IGNORECASE)
+        super(Email, self).__init__(r"^.+@([^.@][^@]+)$", re.IGNORECASE, self.message)
 
-    def __call__(self, form, field, message=None):
+    def __call__(self, form, field):
         try:
             match = super(Email, self).__call__(form, field)
-        except ValidationError:
-            if self.stop:
-                raise StopValidation(self.message)
-            else:
-                raise ValidationError(self.message)
-
-        if not self.validate_hostname(match.group(1)):
-            if self.stop:
-                raise StopValidation(self.message)
-            else:
-                raise ValidationError(self.message)
+            if not self.validate_hostname(match.group(1)):
+                raise_with_stop(self)
+        except Exception:
+            raise_with_stop(self)
 
 
 class Unique(object):

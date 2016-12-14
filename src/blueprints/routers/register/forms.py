@@ -10,7 +10,7 @@ from flask.ext.wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 
 from blueprints.routers.register.r import R
-from flask.ext.bombril.wtforms.validators import Required, Email, Unique, Length, EqualTo
+from flask.ext.bombril.wtforms.validators.validators import Required, Email, Unique, Length, EqualTo
 from models.user.user import User
 
 
