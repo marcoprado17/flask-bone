@@ -6,6 +6,6 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
-from src.app_factory import create_test_app
+from src.app_factory import create_unit_test_app
 
-test_app = create_test_app()
+unit_test_app = create_unit_test_app()

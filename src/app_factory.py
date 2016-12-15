@@ -8,7 +8,7 @@
 from flask import Flask, redirect
 from configs import default_app_config
 from configs.instance import instance_app_config
-from configs.instance import test_app_config
+from configs.instance import unit_test_app_config
 
 
 def __create_app(configs):
@@ -108,7 +108,7 @@ def create_app():
     return app
 
 
-def create_test_app():
-    app = __create_app([default_app_config, instance_app_config, test_app_config])
+def create_unit_test_app():
+    app = __create_app([default_app_config, instance_app_config, unit_test_app_config])
 
     return app

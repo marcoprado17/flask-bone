@@ -14,8 +14,9 @@ from wtforms import ValidationError
 
 from flask_bombril.r import R
 from flask_bombril.wtforms.validators.validators import Required, Email, Unique
-from src.test_app import test_app as app
+from src.unit_test_app import unit_test_app as app
 from src.extensions import db
+
 
 class User(db.Model):
     email = db.Column(db.String(256), primary_key=True, unique=True)
@@ -163,4 +164,3 @@ class TestValidators(TestCase):
             db.create_all()
             db.session.add(User(email="marco.pdsv@gmail.com"))
             db.session.commit()
-
