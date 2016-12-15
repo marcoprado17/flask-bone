@@ -8,14 +8,14 @@
 from pprint import pprint
 from unittest import TestCase
 
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import Field, StringField
 from wtforms import ValidationError
 
 from flask_bombril.r import R
 from flask_bombril.wtforms.validators.validators import Required, Email, Unique
-from wsgi import test_app as app
+from apps_holder import test_app as app
 
 db = SQLAlchemy(app)
 

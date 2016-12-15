@@ -5,10 +5,10 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask.ext.bcrypt import Bcrypt
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
 
-from src.wsgi import app
+from src.apps_holder import app
 from flask import redirect
 
 
