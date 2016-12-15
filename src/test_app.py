@@ -6,10 +6,6 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
-from src.app import app
+from src.app_factory import create_test_app
 
-if __name__ == "__main__":
-    app.run(
-        host='0.0.0.0',
-        port=5000
-    )
+test_app = create_test_app()

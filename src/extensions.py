@@ -5,11 +5,8 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
+from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
 
-from src.app import app
-
-if __name__ == "__main__":
-    app.run(
-        host='0.0.0.0',
-        port=5000
-    )
+bcrypt = Bcrypt()
+db = SQLAlchemy()

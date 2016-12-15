@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 cd /vagrant;
-gunicorn build.apps_holder:app -b localhost:8000;
+gunicorn build.app:app -b localhost:8000;

@@ -8,16 +8,14 @@
 from pprint import pprint
 from unittest import TestCase
 
-from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import Field, StringField
 from wtforms import ValidationError
 
 from flask_bombril.r import R
 from flask_bombril.wtforms.validators.validators import Required, Email, Unique
-from apps_holder import test_app as app
-
-db = SQLAlchemy(app)
+from src.test_app import test_app as app
+from src.extensions import db
 
 class User(db.Model):
     email = db.Column(db.String(256), primary_key=True, unique=True)
@@ -161,6 +159,8 @@ class TestValidators(TestCase):
             self.assertEqual(len(email_mock_form.email.errors), 2)
 
     def test_unique(self):
-        with app.test_client() as c:
+        with app.app_context():
             db.create_all()
+            db.session.add(User(email="marco.pdsv@gmail.com"))
+            db.session.commit()
 
