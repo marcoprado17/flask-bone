@@ -6,7 +6,7 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
-from flask import url_for, g
+from app_contexts import url_for, g
 
 from build.blueprints.components.lightly_route_dependent.navbar.r import R
 

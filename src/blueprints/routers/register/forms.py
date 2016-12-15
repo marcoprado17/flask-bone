@@ -5,12 +5,12 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask import url_for
-from flask.ext.wtf import FlaskForm
+from app_contexts import url_for
+from app_contexts.ext.wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 
 from blueprints.routers.register.r import R
-from flask.ext.bombril.wtforms.validators.validators import Required, Email, Unique, Length, EqualTo
+from app_contexts.ext.bombril.wtforms.validators.validators import Required, Email, Unique, Length, EqualTo
 from models.user.user import User
 
 

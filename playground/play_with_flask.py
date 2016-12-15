@@ -6,7 +6,7 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
-from flask import Flask
+from app_contexts import Flask
 
 app = Flask(__name__)
 

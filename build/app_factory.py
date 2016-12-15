@@ -6,7 +6,7 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
-from flask import Flask
+from app_contexts import Flask
 
 
 def create_app(default_app_config, instance_app_config):
@@ -20,7 +20,7 @@ def create_app(default_app_config, instance_app_config):
     app.config.from_object(default_app_config)
     app.config.from_object(instance_app_config)
 
-    from flask import redirect
+    from app_contexts import redirect
 
     @app.route("/")
     def home_redirect():
