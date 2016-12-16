@@ -5,7 +5,6 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from pprint import pprint
 from unittest import TestCase
 
 from flask_wtf import FlaskForm
@@ -14,7 +13,7 @@ from wtforms import ValidationError
 
 from app_contexts.unit_test_app import unit_test_app as app
 from flask_bombril.r import R
-from flask_bombril.wtforms.validators.validators import Required, Email, Unique
+from flask_bombril.wtforms.validators.validators import Required, Email, Unique, Length
 from src.extensions import db
 
 
@@ -119,7 +118,6 @@ class TestValidators(TestCase):
             ]
 
             def assert_valid_email(valid_email):
-                pprint("Checking valid email: " + valid_email)
                 c.post("/", data=dict(
                     email=valid_email
                 ))
@@ -127,7 +125,6 @@ class TestValidators(TestCase):
                 self.assertTrue(form.validate_on_submit())
 
             def assert_invalid_email(invalid_email):
-                pprint("Checking invalid email: " + invalid_email)
                 c.post("/", data=dict(
                     email=invalid_email
                 ))
@@ -219,6 +216,7 @@ class TestValidators(TestCase):
             with app.test_client() as c:
                 # Testing validator call
                 email = "marco.pdsv@gmail.com"
+
                 c.post("/", data=dict(
                     email=email
                 ))
@@ -267,3 +265,172 @@ class TestValidators(TestCase):
                 form = self.UniqueMockFormStopFalse()
                 self.assertFalse(form.validate_on_submit())
                 self.assertEqual(len(form.email.errors), 2)
+
+    # ==================================================================================================================
+    #
+    #
+    #
+    #
+    # Length Validator
+    # ==================================================================================================================
+    class LengthMockFormMin1MaxNone(FlaskForm):
+        field = Field(validators=[Length(min_length=1)])
+
+    class LengthMockFormMin3MaxNone(FlaskForm):
+        field = Field(validators=[Length(min_length=3)])
+
+    class LengthMockFormMinNoneMax1(FlaskForm):
+        field = Field(validators=[Length(max_length=1)])
+
+    class LengthMockFormMinNoneMax6(FlaskForm):
+        field = Field(validators=[Length(max_length=6)])
+
+    class LengthMockFormMin3Max6(FlaskForm):
+        field = Field(validators=[Length(min_length=3, max_length=6)])
+
+    class LengthMockFormMin3Max6CustomMessage(FlaskForm):
+        field = Field(validators=[Length(min_length=3, max_length=6, message=R.string.validators.test_message)])
+
+    class LengthMockFormMin3Max6CustomCallableMessage(FlaskForm):
+        field = Field(validators=[Length(min_length=3, max_length=6, message=lambda:R.string.validators.test_message)])
+
+    class LengthMockFormMin3Max6StopTrue(FlaskForm):
+        field = Field(validators=[Length(min_length=3, max_length=6, stop=True), AlwaysError()])
+
+    class LengthMockFormMin3Max6StopFalse(FlaskForm):
+        field = Field(validators=[Length(min_length=3, max_length=6, stop=False), AlwaysError()])
+
+    def test_length(self):
+        # Testing Length creation
+        with self.assertRaises(AssertionError):
+            Length()
+        with self.assertRaises(AssertionError):
+            Length(min_length=-2)
+        with self.assertRaises(AssertionError):
+            Length(max_length=-2)
+        with self.assertRaises(AssertionError):
+            Length(min_length=-2, max_length=-2)
+        with self.assertRaises(AssertionError):
+            Length(min_length=6, max_length=3)
+
+        with app.test_client() as c:
+            # Testing validator call
+            c.post("/", data=dict(
+                field="aaa"
+            ))
+            form = self.LengthMockFormMin3MaxNone()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field="aaaa"
+            ))
+            form = self.LengthMockFormMin3MaxNone()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+            ))
+            form = self.LengthMockFormMin1MaxNone()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.field_min_length_singular % dict(min_length=1))
+
+            c.post("/", data=dict(
+                field=""
+            ))
+            form = self.LengthMockFormMin1MaxNone()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.field_min_length_singular % dict(min_length=1))
+
+            c.post("/", data=dict(
+                field="aa"
+            ))
+            form = self.LengthMockFormMin3MaxNone()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.field_min_length_plural % dict(min_length=3))
+
+            c.post("/", data=dict(
+                field="aaa"
+            ))
+            form = self.LengthMockFormMinNoneMax6()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field="aaaaaa"
+            ))
+            form = self.LengthMockFormMinNoneMax6()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field="aa"
+            ))
+            form = self.LengthMockFormMinNoneMax1()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.field_max_length_singular % dict(max_length=1))
+
+            c.post("/", data=dict(
+                field="aaaaaaa"
+            ))
+            form = self.LengthMockFormMinNoneMax6()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.field_max_length_plural % dict(max_length=6))
+
+            c.post("/", data=dict(
+                field="aa"
+            ))
+            form = self.LengthMockFormMin3Max6()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.field_length_range %
+                             dict(min_length=3, max_length=6))
+
+            c.post("/", data=dict(
+                field="aaa"
+            ))
+            form = self.LengthMockFormMin3Max6()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field="aaaaa"
+            ))
+            form = self.LengthMockFormMin3Max6()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field="aaaaaaa"
+            ))
+            form = self.LengthMockFormMin3Max6()
+            self.assertFalse(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field="aaaaaaa"
+            ))
+            form = self.LengthMockFormMin3Max6CustomMessage()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.test_message)
+
+            c.post("/", data=dict(
+                field="aaaaaaa"
+            ))
+            form = self.LengthMockFormMin3Max6CustomCallableMessage()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+            self.assertEqual(form.field.errors[0], R.string.validators.test_message)
+
+            c.post("/", data=dict(
+                field="aaaaaaa"
+            ))
+            form = self.LengthMockFormMin3Max6StopTrue()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 1)
+
+            c.post("/", data=dict(
+                field="aaaaaaa"
+            ))
+            form = self.LengthMockFormMin3Max6StopFalse()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field.errors), 2)

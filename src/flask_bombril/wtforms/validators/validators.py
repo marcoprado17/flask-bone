@@ -7,16 +7,25 @@
 # ======================================================================================================================
 import gettext
 import re
+
 from wtforms.validators import InputRequired, Regexp, HostnameValidation, ValidationError, StopValidation
 
 from flask_bombril.exceptions import InvalidFieldError
 from flask_bombril.r import R
 
-def raise_with_stop(validator):
+
+def raise_with_stop(validator, message=None):
     if validator.stop:
-        raise StopValidation(validator.message)
+        if message:
+            raise StopValidation(message)
+        else:
+            raise StopValidation(validator.message)
     else:
-        raise ValidationError(validator.message)
+        if message:
+            raise ValidationError(message)
+        else:
+            raise ValidationError(validator.message)
+
 
 class Required(InputRequired):
     def __init__(self):
@@ -33,12 +42,12 @@ class Email(Regexp):
         )
         super(Email, self).__init__(r"^.+@([^.@][^@]+)$", re.IGNORECASE, self.message)
 
-    def __call__(self, form, field):
+    def __call__(self, form, field, message=None):
         try:
             match = super(Email, self).__call__(form, field)
             if not self.validate_hostname(match.group(1)):
                 raise_with_stop(self)
-        except Exception:
+        except (ValidationError, StopValidation):
             raise_with_stop(self)
 
 
@@ -55,14 +64,12 @@ class Unique(object):
 
         check = self.model.query.filter(self.field == field.data).first()
         if check:
-            if self.stop:
-                raise StopValidation(self.message)
-            else:
-                raise ValidationError(self.message)
+            raise_with_stop(self)
 
 
 class Length(object):
     def __init__(self, min_length=-1, max_length=-1, message=None, stop=True):
+        assert min_length >= -1 and max_length >= -1
         assert min_length != -1 or max_length != -1
         assert max_length == -1 or min_length <= max_length
         self.min = min_length
@@ -91,10 +98,7 @@ class Length(object):
                 else:
                     message = R.string.validators.field_length_range % dict(min_length=self.min, max_length=self.max)
 
-            if self.stop:
-                raise StopValidation(message)
-            else:
-                raise ValidationError(message)
+            raise_with_stop(self, message=message)
 
 
 class EqualTo(object):
@@ -116,7 +120,4 @@ class EqualTo(object):
             message = self.message
             if message is None:
                 message = R.string.validators.field_must_be_equal_to % dict(other_name=self.field_name)
-            if self.stop:
-                raise StopValidation(message)
-            else:
-                raise ValidationError(message)
+            raise_with_stop(self, message=message)
