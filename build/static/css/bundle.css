@@ -6427,9 +6427,6 @@ button.close {
 
 /*# sourceMappingURL=bootstrap.css.map */
 
-.p {
-  font-size: 12px; }
-
 @charset "UTF-8";
 /*
 ========================================================================================================================
@@ -6460,3 +6457,6 @@ Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
     float: right; }
   .__navbar__ ul.nav.navbar-nav {
     float: none; } }
+
+.p {
+  font-size: 12px; }
