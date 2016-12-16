@@ -11,11 +11,13 @@ class Resources:
     def __init__(self):
         self.string = self.__Strings()
         self.id = self.__Ids()
+        self.dimen = self.__Dimens()
 
     class __Strings:
         def __init__(self):
             self.validators = self.__Validators()
             self.test_message = "Mensagem de teste"
+            self.test_message_2 = "Mensagem de teste 2"
 
         class __Validators:
             def __init__(self):
@@ -34,6 +36,11 @@ class Resources:
     class __Ids:
         def __init__(self):
             self.example = "example"
+
+    class __Dimens:
+        def __init__(self):
+            self.test_int = 42
+            self.test_int_2 = 17
 
 
 R = Resources()
