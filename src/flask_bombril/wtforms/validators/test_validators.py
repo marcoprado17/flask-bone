@@ -12,8 +12,9 @@ from wtforms import Field, StringField
 from wtforms import ValidationError
 
 from app_contexts.unit_test_app import unit_test_app as app
+from flask.ext.bombril.exceptions import InvalidFieldError
 from flask_bombril.r import R
-from flask_bombril.wtforms.validators.validators import Required, Email, Unique, Length
+from flask_bombril.wtforms.validators.validators import Required, Email, Unique, Length, EqualTo
 from src.extensions import db
 
 
@@ -289,10 +290,10 @@ class TestValidators(TestCase):
         field = Field(validators=[Length(min_length=3, max_length=6)])
 
     class LengthMockFormMin3Max6CustomMessage(FlaskForm):
-        field = Field(validators=[Length(min_length=3, max_length=6, message=R.string.validators.test_message)])
+        field = Field(validators=[Length(min_length=3, max_length=6, message=R.string.test_message)])
 
     class LengthMockFormMin3Max6CustomCallableMessage(FlaskForm):
-        field = Field(validators=[Length(min_length=3, max_length=6, message=lambda:R.string.validators.test_message)])
+        field = Field(validators=[Length(min_length=3, max_length=6, message=lambda:R.string.test_message)])
 
     class LengthMockFormMin3Max6StopTrue(FlaskForm):
         field = Field(validators=[Length(min_length=3, max_length=6, stop=True), AlwaysError()])
@@ -411,7 +412,7 @@ class TestValidators(TestCase):
             form = self.LengthMockFormMin3Max6CustomMessage()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 1)
-            self.assertEqual(form.field.errors[0], R.string.validators.test_message)
+            self.assertEqual(form.field.errors[0], R.string.test_message)
 
             c.post("/", data=dict(
                 field="aaaaaaa"
@@ -419,18 +420,124 @@ class TestValidators(TestCase):
             form = self.LengthMockFormMin3Max6CustomCallableMessage()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 1)
-            self.assertEqual(form.field.errors[0], R.string.validators.test_message)
+            self.assertEqual(form.field.errors[0], R.string.test_message)
 
+            # Testing validator stop
+            # stop=True
             c.post("/", data=dict(
                 field="aaaaaaa"
             ))
             form = self.LengthMockFormMin3Max6StopTrue()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 1)
-
+            # stop=False
             c.post("/", data=dict(
                 field="aaaaaaa"
             ))
             form = self.LengthMockFormMin3Max6StopFalse()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 2)
+
+    # ==================================================================================================================
+    #
+    #
+    #
+    #
+    # EqualTo Validator
+    # ==================================================================================================================
+    class EqualToMockForm(FlaskForm):
+        field_1 = StringField(validators=[EqualTo("field_2")])
+        field_2 = StringField()
+
+    class EqualToMockFormCustomMessage(FlaskForm):
+        field_1 = StringField(validators=[EqualTo("field_2", message=R.string.test_message)])
+        field_2 = StringField()
+
+    class EqualToMockFormCustomCallableMessage(FlaskForm):
+        field_1 = StringField(validators=[EqualTo("field_2", message=lambda:R.string.test_message)])
+        field_2 = StringField()
+
+    class EqualToMockFormKeyError(FlaskForm):
+        field_1 = StringField(validators=[EqualTo("field_3")])
+        field_2 = StringField()
+
+    class EqualToMockFormStopTrue(FlaskForm):
+        field_1 = StringField(validators=[EqualTo("field_2", stop=True), AlwaysError()])
+        field_2 = StringField()
+
+    class EqualToMockFormStopFalse(FlaskForm):
+        field_1 = StringField(validators=[EqualTo("field_2", stop=False), AlwaysError()])
+        field_2 = StringField()
+
+    def test_equal_to(self):
+        with app.test_client() as c:
+            # Testing validator call
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aaa"
+            ))
+            form = self.EqualToMockForm()
+            self.assertTrue(form.validate_on_submit())
+
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aa"
+            ))
+            form = self.EqualToMockForm()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field_1.errors), 1)
+            self.assertEqual(form.field_1.errors[0], R.string.validators.field_must_be_equal_to %
+                             dict(other_name="field_2"))
+
+            c.post("/", data=dict(
+                field_1="aaa"
+            ))
+            form = self.EqualToMockForm()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field_1.errors), 1)
+            self.assertEqual(form.field_1.errors[0], R.string.validators.field_must_be_equal_to %
+                             dict(other_name="field_2"))
+
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aa"
+            ))
+            form = self.EqualToMockFormCustomMessage()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field_1.errors), 1)
+            self.assertEqual(form.field_1.errors[0], R.string.test_message)
+
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aa"
+            ))
+            form = self.EqualToMockFormCustomCallableMessage()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field_1.errors), 1)
+            self.assertEqual(form.field_1.errors[0], R.string.test_message)
+
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aa"
+            ))
+            form = self.EqualToMockFormKeyError()
+            with self.assertRaises(InvalidFieldError):
+                form.validate_on_submit()
+
+            # Testing validator stop
+            # stop=True
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aa"
+            ))
+            form = self.EqualToMockFormStopTrue()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field_1.errors), 1)
+            # stop=False
+            c.post("/", data=dict(
+                field_1="aaa",
+                field_2="aa"
+            ))
+            form = self.EqualToMockFormStopFalse()
+            self.assertFalse(form.validate_on_submit())
+            self.assertEqual(len(form.field_1.errors), 2)

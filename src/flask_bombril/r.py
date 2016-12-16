@@ -15,10 +15,10 @@ class Resources:
     class __Strings:
         def __init__(self):
             self.validators = self.__Validators()
+            self.test_message = "Mensagem de teste"
 
         class __Validators:
             def __init__(self):
-                self.test_message = "Mensagem de test"
                 self.required_field = "Campo obrigatório."
                 self.invalid_email_format = "Formato de email inválido."
                 self.email_already_registered = "Email já cadastrado."

@@ -114,8 +114,8 @@ class EqualTo(object):
         try:
             other = form[self.field_name]
         except KeyError:
-            message = R.string.invalid_field_name % dict(field_name=self.field_name)
-            raise InvalidFieldError(message=message)
+            message = R.string.validators.invalid_field_name % dict(field_name=self.field_name)
+            raise InvalidFieldError(message)
         if field.data != other.data:
             message = self.message
             if message is None:
