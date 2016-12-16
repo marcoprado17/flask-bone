@@ -8,22 +8,22 @@
 
 from flask import url_for, g
 
-from src.blueprints.components.lightly_route_dependent.navbar.r import R
+from src.r import R
 
 # TODO: After implement user management and user permissions, provide navbar data according to the user in question
 
 
 class NavbarData:
     def __init__(self):
-        self.title = R.string.micro_blog
+        self.title = R.string.navbar.micro_blog
         self.left_items = [
-            NavbarItemData(R.string.home, url_for("home.index"), self.is_active(R.id.home)),
+            NavbarItemData(R.string.navbar.home, url_for("home.index"), self.is_active(R.id.navbar.home)),
             # TODO: Add correct href after declaring the blueprints
-            NavbarItemData(R.string.posts, "#", self.is_active(R.id.posts)),
+            NavbarItemData(R.string.navbar.posts, "#", self.is_active(R.id.navbar.posts)),
         ]
         self.right_items = [
-            NavbarItemData(R.string.login, "#", self.is_active(R.id.login)),
-            NavbarItemData(R.string.register, url_for("register.index"), self.is_active(R.id.register)),
+            NavbarItemData(R.string.navbar.login, "#", self.is_active(R.id.navbar.login)),
+            NavbarItemData(R.string.navbar.register, url_for("register.index"), self.is_active(R.id.navbar.register)),
         ]
 
     # noinspection PyMethodMayBeStatic

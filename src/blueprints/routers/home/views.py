@@ -7,7 +7,7 @@
 # ======================================================================================================================
 
 from flask import Blueprint, render_template, g, current_app as app
-from src.blueprints.components.lightly_route_dependent.navbar.r import navbar_R
+from src.r import R
 
 home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")
 
@@ -18,5 +18,5 @@ def index():
     app.logger.debug("Oi!")
     app.logger.error("Olá!")
     app.logger.info("Hi!")
-    g.active_navbar_item_id = navbar_R.id.home
+    g.active_navbar_item_id = R.id.navbar.home
     return render_template("home/home.html")

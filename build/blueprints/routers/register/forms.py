@@ -9,7 +9,7 @@ from flask import url_for
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 
-from src.r import R
+from build.r import R
 from flask_bombril.wtforms.validators.validators import Required, Email, Unique, Length, EqualTo
 from models.user.user import User
 
