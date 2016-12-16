@@ -30,52 +30,36 @@ class AlwaysError(object):
         raise ValidationError("AlwaysError")
 
 
-class RequiredMockForm(FlaskForm):
-    field = Field(validators=[Required()])
-
-
-class RequiredMockFormWithAlwaysError(FlaskForm):
-    field = Field(validators=[Required(), AlwaysError()])
-
-
-class EmailMockForm(FlaskForm):
-    email = Field(validators=[Email()])
-
-
-class EmailMockFormStopTrueWithAlwaysError(FlaskForm):
-    email = Field(validators=[Email(stop=True), AlwaysError()])
-
-
-class EmailMockFormStopFalseWithAlwaysError(FlaskForm):
-    email = Field(validators=[Email(stop=False), AlwaysError()])
-
-
-class UniqueMockForm(FlaskForm):
-    email = StringField(validators=[
-        Unique(
-            model=User,
-            field=User.email
-        )
-    ])
-
-
 @app.route("/", methods=["POST"])
 def required():
     return ""
 
 
 class TestValidators(TestCase):
+    # ==================================================================================================================
+    #
+    #
+    #
+    #
+    # Required Validator
+    # ==================================================================================================================
+    class RequiredMockForm(FlaskForm):
+        field = Field(validators=[Required()])
+
+    class RequiredMockFormWithAlwaysError(FlaskForm):
+        field = Field(validators=[Required(), AlwaysError()])
+
     def test_required(self):
         with app.test_client() as c:
             # Testing validator call
             c.post("/", data=dict(
                 field="a"
             ))
-            form = RequiredMockForm()
+            form = self.RequiredMockForm()
             self.assertTrue(form.validate_on_submit())
 
             c.post("/")
-            form = RequiredMockForm()
+            form = self.RequiredMockForm()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 1)
             self.assertEqual(form.field.errors[0], R.string.validators.required_field)
@@ -83,7 +67,7 @@ class TestValidators(TestCase):
             c.post("/", data=dict(
                 field=None
             ))
-            form = RequiredMockForm()
+            form = self.RequiredMockForm()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 1)
             self.assertEqual(form.field.errors[0], R.string.validators.required_field)
@@ -91,9 +75,25 @@ class TestValidators(TestCase):
             # Testing validator stop
             # stop=True
             c.post("/")
-            form = RequiredMockFormWithAlwaysError()
+            form = self.RequiredMockFormWithAlwaysError()
             self.assertFalse(form.validate_on_submit())
             self.assertEqual(len(form.field.errors), 1)
+
+    # ==================================================================================================================
+    #
+    #
+    #
+    #
+    # Email Validator
+    # ==================================================================================================================
+    class EmailMockForm(FlaskForm):
+        email = Field(validators=[Email()])
+
+    class EmailMockFormStopTrueWithAlwaysError(FlaskForm):
+        email = Field(validators=[Email(stop=True), AlwaysError()])
+
+    class EmailMockFormStopFalseWithAlwaysError(FlaskForm):
+        email = Field(validators=[Email(stop=False), AlwaysError()])
 
     def test_email(self):
         with app.test_client() as c:
@@ -123,7 +123,7 @@ class TestValidators(TestCase):
                 c.post("/", data=dict(
                     email=valid_email
                 ))
-                form = EmailMockForm()
+                form = self.EmailMockForm()
                 self.assertTrue(form.validate_on_submit())
 
             def assert_invalid_email(invalid_email):
@@ -131,7 +131,7 @@ class TestValidators(TestCase):
                 c.post("/", data=dict(
                     email=invalid_email
                 ))
-                form = EmailMockForm()
+                form = self.EmailMockForm()
                 self.assertFalse(form.validate_on_submit())
                 self.assertEqual(len(form.email.errors), 1)
                 self.assertEqual(form.email.errors[0], R.string.validators.invalid_email_format)
@@ -148,20 +148,122 @@ class TestValidators(TestCase):
             c.post("/", data=dict(
                 email=invalid_emails[0]
             ))
-            email_mock_form = EmailMockFormStopTrueWithAlwaysError()
+            email_mock_form = self.EmailMockFormStopTrueWithAlwaysError()
             self.assertFalse(email_mock_form.validate_on_submit())
             self.assertEqual(len(email_mock_form.email.errors), 1)
             # stop=False
             c.post("/", data=dict(
                 email=invalid_emails[0]
             ))
-            email_mock_form = EmailMockFormStopFalseWithAlwaysError()
+            email_mock_form = self.EmailMockFormStopFalseWithAlwaysError()
             self.assertFalse(email_mock_form.validate_on_submit())
             self.assertEqual(len(email_mock_form.email.errors), 2)
 
+    # ==================================================================================================================
+    #
+    #
+    #
+    #
+    # Unique Validator
+    # ==================================================================================================================
+    class UniqueMockForm(FlaskForm):
+        email = StringField(validators=[
+            Unique(
+                model=User,
+                field=User.email
+            )
+        ])
+
+    class UniqueMockFormCustomMessage(FlaskForm):
+        email = StringField(validators=[
+            Unique(
+                model=User,
+                field=User.email,
+                message=R.string.validators.email_already_registered
+            )
+        ])
+
+    class UniqueMockFormCustomCallableMessage(FlaskForm):
+        email = StringField(validators=[
+            Unique(
+                model=User,
+                field=User.email,
+                message=lambda: R.string.validators.email_already_registered
+            )
+        ])
+
+    class UniqueMockFormStopTrue(FlaskForm):
+        email = StringField(validators=[
+            Unique(
+                model=User,
+                field=User.email,
+                stop=True
+            ),
+            AlwaysError()
+        ])
+
+    class UniqueMockFormStopFalse(FlaskForm):
+        email = StringField(validators=[
+            Unique(
+                model=User,
+                field=User.email,
+                stop=False
+            ),
+            AlwaysError()
+        ])
+
     def test_unique(self):
         with app.app_context():
-            pass
-            # db.create_all()
-            # db.session.add(User(email="marco.pdsv@gmail.com"))
-            # db.session.commit()
+            db.drop_all()
+            db.create_all()
+            with app.test_client() as c:
+                # Testing validator call
+                email = "marco.pdsv@gmail.com"
+                c.post("/", data=dict(
+                    email=email
+                ))
+                form = self.UniqueMockForm()
+                self.assertTrue(form.validate_on_submit())
+
+                db.session.add(User(email=email))
+                db.session.commit()
+
+                c.post("/", data=dict(
+                    email=email
+                ))
+                form = self.UniqueMockForm()
+                self.assertFalse(form.validate_on_submit())
+                self.assertEqual(len(form.email.errors), 1)
+                self.assertEqual(form.email.errors[0], R.string.validators.unique_field)
+
+                c.post("/", data=dict(
+                    email=email
+                ))
+                form = self.UniqueMockFormCustomMessage()
+                self.assertFalse(form.validate_on_submit())
+                self.assertEqual(len(form.email.errors), 1)
+                self.assertEqual(form.email.errors[0], R.string.validators.email_already_registered)
+
+                c.post("/", data=dict(
+                    email=email
+                ))
+                form = self.UniqueMockFormCustomCallableMessage()
+                self.assertFalse(form.validate_on_submit())
+                self.assertEqual(len(form.email.errors), 1)
+                self.assertEqual(form.email.errors[0], R.string.validators.email_already_registered)
+
+                # Testing validator stop
+                # stop=True
+                c.post("/", data=dict(
+                    email=email
+                ))
+                form = self.UniqueMockFormStopTrue()
+                self.assertFalse(form.validate_on_submit())
+                self.assertEqual(len(form.email.errors), 1)
+                # stop=False
+                c.post("/", data=dict(
+                    email=email
+                ))
+                form = self.UniqueMockFormStopFalse()
+                self.assertFalse(form.validate_on_submit())
+                self.assertEqual(len(form.email.errors), 2)
