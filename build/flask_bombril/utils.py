@@ -5,25 +5,17 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-
-from jinja2.runtime import Undefined
-
-
-def assert_defined(value):
-    assert not isinstance(value, Undefined)
-    return value
+import unittest
+from unittest import TestSuite
 
 
-def assert_callable(value):
-    assert callable(value)
-    return value
+def get_test_suite_from_test_cases(test_cases):
+    suite = TestSuite()
+    for test_class in test_cases:
+        tests = unittest.TestLoader().loadTestsFromTestCase(test_class)
+        suite.addTests(tests)
+    return suite
 
 
-def call(func, *args, **kwargs):
-    return func(*args, **kwargs)
-
-
-def if_filter(value, condition, else_value):
-    if condition:
-        return value
-    return else_value
+def get_test_suite_from_test_suites(suites):
+    return unittest.TestSuite(suites)

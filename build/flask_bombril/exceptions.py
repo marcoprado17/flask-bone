@@ -6,5 +6,6 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
+
 class InvalidFieldError(Exception):
     pass

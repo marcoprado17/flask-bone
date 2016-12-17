@@ -5,25 +5,11 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-
-from jinja2.runtime import Undefined
-
-
-def assert_defined(value):
-    assert not isinstance(value, Undefined)
-    return value
+from wtforms.validators import InputRequired
+from flask_bombril.r import R
 
 
-def assert_callable(value):
-    assert callable(value)
-    return value
-
-
-def call(func, *args, **kwargs):
-    return func(*args, **kwargs)
-
-
-def if_filter(value, condition, else_value):
-    if condition:
-        return value
-    return else_value
+class Required(InputRequired):
+    def __init__(self):
+        self.message = R.string.validators.required_field
+        super(Required, self).__init__(message=self.message)

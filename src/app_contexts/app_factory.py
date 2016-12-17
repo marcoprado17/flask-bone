@@ -67,7 +67,7 @@ def create_app():
     #
     # Registering jinja filters
     # ==================================================================================================================
-    from src.flask_bombril.jinja.filters.filters import assert_defined, assert_callable, call, if_filter
+    from src.flask_bombril.jinja.filters import assert_defined, assert_callable, call, if_filter
     app.jinja_env.filters['assert_defined'] = assert_defined
     app.jinja_env.filters['assert_callable'] = assert_callable
     app.jinja_env.filters['call'] = call
