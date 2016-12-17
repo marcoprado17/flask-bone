@@ -9,8 +9,8 @@
     </database>
     <schema id="3" parent="2" name="public">
       <ObjectId>2200</ObjectId>
-      <IntrospectionTimestamp>2016-12-15.10:18:58.463</IntrospectionTimestamp>
-      <IntrospectionStateNumber>665</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2016-12-16.16:31:36.944</IntrospectionTimestamp>
+      <IntrospectionStateNumber>923</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -30,22 +30,22 @@
       <ObjectId>12121</ObjectId>
     </schema>
     <table id="9" parent="3" name="user">
-      <ObjectId>16387</ObjectId>
-      <StateNumber>665</StateNumber>
+      <ObjectId>24711</ObjectId>
+      <StateNumber>923</StateNumber>
     </table>
     <column id="10" parent="9" name="email">
       <Position>1</Position>
-      <DataType>varchar(256)|0</DataType>
+      <DataType>varchar|0</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>665</StateNumber>
+      <StateNumber>923</StateNumber>
     </column>
     <index id="11" parent="9" name="user_pkey">
-      <ObjectId>16390</ObjectId>
+      <ObjectId>24717</ObjectId>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="12" parent="9" name="user_pkey">
-      <ObjectId>16391</ObjectId>
+      <ObjectId>24718</ObjectId>
       <ColNames>email</ColNames>
       <UnderlyingIndexName>user_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
