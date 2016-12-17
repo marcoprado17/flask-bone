@@ -5,10 +5,10 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-
 from flask import render_template, g, current_app as app
-from src.r import R
-from src.blueprints.routers.home import home_blueprint
+from r import R
+from blueprints.routers.home import home_blueprint
+
 
 @home_blueprint.route("/")
 def index():

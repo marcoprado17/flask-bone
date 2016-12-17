@@ -6,9 +6,9 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 from flask import render_template, g
-from src.r import R
-from src.blueprints.routers.register.index_data import RegisterData
-from src.blueprints.routers.register import register_blueprint
+from r import R
+from blueprints.routers.register.index_data import RegisterData
+from blueprints.routers.register import register_blueprint
 
 
 @register_blueprint.route("/")
