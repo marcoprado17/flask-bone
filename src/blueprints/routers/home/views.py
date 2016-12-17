@@ -6,11 +6,9 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 
-from flask import Blueprint, render_template, g, current_app as app
+from flask import render_template, g, current_app as app
 from src.r import R
-
-home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")
-
+from src.blueprints.routers.home import home_blueprint
 
 @home_blueprint.route("/")
 def index():
@@ -19,4 +17,4 @@ def index():
     app.logger.error("Olá!")
     app.logger.info("Hi!")
     g.active_navbar_item_id = R.id.navbar.home
-    return render_template("home/home.html")
+    return render_template("home/index.html")

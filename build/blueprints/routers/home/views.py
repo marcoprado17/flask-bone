@@ -19,4 +19,4 @@ def index():
     app.logger.error("Olá!")
     app.logger.info("Hi!")
     g.active_navbar_item_id = R.id.navbar.home
-    return render_template("home/home.html")
+    return render_template("home/index.html")

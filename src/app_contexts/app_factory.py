@@ -51,9 +51,9 @@ def create_app():
     #
     # Routers
     #
-    from src.blueprints.routers.home.views import home_blueprint
+    from src.blueprints.routers.home import home_blueprint
     app.register_blueprint(home_blueprint, url_prefix="/home")
-    from src.blueprints.routers.register.views import register_blueprint
+    from src.blueprints.routers.register import register_blueprint
     app.register_blueprint(register_blueprint, url_prefix="/cadastrar")
     #
     # Wrappers

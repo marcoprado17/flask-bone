@@ -11,6 +11,8 @@
             <path value="file://$PROJECT_DIR$/bower_components/jquery/dist" />
             <path value="file://$PROJECT_DIR$/src/blueprints/bootstrap/static" />
             <path value="file://$PROJECT_DIR$/src/blueprints/routers/register/static" />
+            <path value="file://$PROJECT_DIR$/src/blueprints/components/lightly_route_dependent/navbar/static" />
+            <path value="file://$PROJECT_DIR$/src/blueprints/routers/home/static" />
           </resourceRoots>
         </entryData>
       </entry>
