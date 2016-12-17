@@ -5,14 +5,11 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-
 from flask import url_for, g
+from r import R
 
-from build.r import R
 
 # TODO: After implement user management and user permissions, provide navbar data according to the user in question
-
-
 class NavbarData:
     def __init__(self):
         self.title = R.string.navbar.micro_blog

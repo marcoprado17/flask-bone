@@ -6427,6 +6427,12 @@ button.close {
 
 /*# sourceMappingURL=bootstrap.css.map */
 
+.__home__.__index__ .modal-title {
+  color: red; }
+
+.__home__.__index__ h2 {
+  color: goldenrod; }
+
 @charset "UTF-8";
 /*
 ========================================================================================================================
@@ -6437,12 +6443,6 @@ Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 */
 .__register__.__index__ {
   color: red; }
-
-.__home__ .modal-title {
-  color: red; }
-
-.__home__ h2 {
-  color: goldenrod; }
 
 @charset "UTF-8";
 /*

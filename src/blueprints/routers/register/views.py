@@ -7,7 +7,7 @@
 # ======================================================================================================================
 from flask import render_template, g
 from r import R
-from blueprints.routers.register.index_data import RegisterData
+from index_data import RegisterData
 from blueprints.routers.register import register_blueprint
 
 

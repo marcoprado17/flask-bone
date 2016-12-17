@@ -5,7 +5,7 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask_bombril.jinja.filters import assert_defined, assert_callable, call, if_filter
+from flask_bombril.jinja_filters import assert_defined, assert_callable, call, if_filter
 from unittest import TestCase as BaseTestCase
 from jinja2.runtime import Undefined
 

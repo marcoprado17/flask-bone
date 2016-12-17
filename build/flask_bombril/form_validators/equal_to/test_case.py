@@ -9,9 +9,9 @@ from unittest import TestCase as BaseTestCase
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from flask_bombril.exceptions import InvalidFieldError
-from flask_bombril.wtforms.validators.equal_to import EqualTo
+from equal_to import EqualTo
 from flask_bombril.r import R
-from flask_bombril.wtforms.validators.utils import AlwaysError
+from flask_bombril.form_validators.utils import AlwaysError
 from app_contexts.unit_test_app import unit_test_app as app
 
 

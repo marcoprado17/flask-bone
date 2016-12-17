@@ -8,14 +8,9 @@
 from flask import url_for
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
-
-from build.r import R
-from flask_bombril.wtforms.validators.required import Required
-from flask_bombril.wtforms.validators.email_format import EmailFormat
-from flask_bombril.wtforms.validators.unique import Unique
-from flask_bombril.wtforms.validators.length import Length
-from flask_bombril.wtforms.validators.equal_to import EqualTo
-from models.user import User
+from r import R
+from flask_bombril.form_validators import Required, EmailFormat, Unique, Length, EqualTo
+from models import User
 
 
 class RegisterForm(FlaskForm):

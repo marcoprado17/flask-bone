@@ -8,13 +8,8 @@
 from flask import url_for
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
-
 from r import R
-from flask_bombril.form_validators.required import Required
-from flask_bombril.form_validators.email_format import EmailFormat
-from flask_bombril.form_validators.unique import Unique
-from flask_bombril.form_validators.length import Length
-from flask_bombril.form_validators.equal_to import EqualTo
+from flask_bombril.form_validators import Required, EmailFormat, Unique, Length, EqualTo
 from models import User
 
 

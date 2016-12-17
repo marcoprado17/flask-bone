@@ -5,7 +5,6 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-
-from app_contexts.app_factory import create_app
+from app_factory import create_app
 
 app = create_app()

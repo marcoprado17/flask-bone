@@ -7,9 +7,9 @@
 # ======================================================================================================================
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from flask_bombril.wtforms.validators.unique import Unique
+from unique import Unique
 from flask_bombril.r import R
-from flask_bombril.wtforms.validators.utils import AlwaysError, User
+from flask_bombril.form_validators.utils import AlwaysError, User
 
 
 class MockForm(FlaskForm):

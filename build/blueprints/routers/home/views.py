@@ -5,11 +5,9 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-
-from flask import Blueprint, render_template, g, current_app as app
-from build.r import R
-
-home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")
+from flask import render_template, g, current_app as app
+from r import R
+from __init__ import home_blueprint
 
 
 @home_blueprint.route("/")
