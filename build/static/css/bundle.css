@@ -6427,6 +6427,9 @@ button.close {
 
 /*# sourceMappingURL=bootstrap.css.map */
 
+.btn-info {
+  background-color: darkred; }
+
 .__home__.__index__ .modal-title {
   color: red; }
 
@@ -6457,6 +6460,3 @@ Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
     float: right; }
   .__navbar__ ul.nav.navbar-nav {
     float: none; } }
-
-.p {
-  font-size: 12px; }
