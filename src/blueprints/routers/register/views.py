@@ -9,7 +9,7 @@ from flask import render_template, g, request, redirect, url_for
 
 from forms import RegisterForm
 from r import R
-from index_data import RegisterData
+from index_data_provider import register_index_data_provider
 from blueprints.routers.register import register_blueprint
 from emails import email_manager
 
@@ -30,8 +30,9 @@ def index():
         email_manager.send_register_email()
         return redirect(url_for("home.index"))
 
+
 @register_blueprint.context_processor
 def _():
     return dict(
-        get_register_index_data=lambda: RegisterData(),
+        get_register_index_data=lambda: register_index_data_provider.get_data(),
     )

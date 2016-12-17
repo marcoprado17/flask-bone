@@ -7,6 +7,16 @@
 # ======================================================================================================================
 from flask import g
 
-class RegisterData:
+
+class RegisterIndexDataProvider:
     def __init__(self):
-        self.form = g.form
+        pass
+
+
+    def get_data(self):
+        return dict(
+            form=g.form
+        )
+
+
+register_index_data_provider = RegisterIndexDataProvider()
