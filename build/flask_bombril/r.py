@@ -43,5 +43,4 @@ class Resources:
             self.test_int = 42
             self.test_int_2 = 17
 
-
 R = Resources()

@@ -10,37 +10,42 @@ from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 
 from src.r import R
-from flask_bombril.wtforms.validators.validators import Required, Email, Unique, Length, EqualTo
-from models.user.user import User
+from flask_bombril.wtforms.validators.required import Required
+from flask_bombril.wtforms.validators.email_format import EmailFormat
+from flask_bombril.wtforms.validators.unique import Unique
+from flask_bombril.wtforms.validators.length import Length
+from flask_bombril.wtforms.validators.equal_to import EqualTo
+from models.user import User
 
 
 class RegisterForm(FlaskForm):
     # TODO: After create login blueprint, set the correct url
     email = StringField(
-        'Email',
+        R.string.register.email_label,
         validators=[
             Required(),
-            Email(),
+            EmailFormat(),
             Unique(model=User, field=User.email,
-                   message=lambda: R.string.register.email_already_registered % dict(href=url_for("home.index")))
+                   message=lambda: R.string.register.email_already_registered % dict(href=url_for("home.index"))),
+            Length(max_length=R.dimen.models.user.max_email_length)
         ])
     password = PasswordField(
-        "Senha",
+        R.string.register.password_label,
         validators=[
             Required(),
             Length(
-                min_length=R.dimen.register.min_password_length,
-                max_length=R.dimen.register.max_password_length,
+                min_length=R.dimen.models.user.min_password_length,
+                max_length=R.dimen.models.user.max_password_length,
                 message=R.string.register.password_length % dict(
-                    min_length=R.dimen.register.min_password_length,
-                    max_length=R.dimen.register.max_password_length
+                    min_length=R.dimen.models.user.min_password_length,
+                    max_length=R.dimen.models.user.max_password_length
                 )
             ),
             EqualTo("password_confirmation", message=R.string.register.password_mismatch)
         ])
     password_confirmation = PasswordField(
-        "Confirmação da senha",
+        R.string.register.password_confirmation_label,
         validators=[
             Required()
         ])
-    submit = SubmitField("Cadastrar")
+    submit = SubmitField(R.string.register.register)

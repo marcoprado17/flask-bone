@@ -5,3 +5,21 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
+from src.r import R
+from src.extensions import bcrypt, db
+
+from sqlalchemy.ext.hybrid import hybrid_property
+
+
+class User(db.Model):
+    email = db.Column(db.String(R.dimen.max_email_char_length), primary_key=True, unique=True)
+    _password = db.Column(db.String(R.dimen.max_password_char_length))
+    email_confirmed = db.Column(db.Boolean, default=False)
+
+    @hybrid_property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, plaintext):
+        self._password = bcrypt.generate_password_hash(plaintext)

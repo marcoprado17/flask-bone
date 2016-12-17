@@ -39,6 +39,10 @@ class Resources:
                     "Email já cadastrado. Para entrar com este email, clique <a href='%(href)s'>aqui</a>."
                 self.password_mismatch = "As senhas digitadas não são iguais."
                 self.password_length = "A senha deve possuir entre %(min_length)d e %(max_length)d caracteres."
+                self.email_label = "Email"
+                self.password_label = "Senha"
+                self.password_confirmation_label = "Confirmação da senha"
+                self.register = "Cadastrar"
 
     class __Ids:
         def __init__(self):
@@ -62,6 +66,7 @@ class Resources:
         def __init__(self):
             self.navbar = self.__Navbar()
             self.register = self.__Register()
+            self.models = self.__Models()
 
         class __Navbar:
             def __init__(self):
@@ -69,7 +74,16 @@ class Resources:
 
         class __Register:
             def __init__(self):
-                self.min_password_length = 6
-                self.max_password_length = 32
+                self.example = 42
+
+        class __Models:
+            def __init__(self):
+                self.user = self.__User()
+
+            class __User:
+                def __init__(self):
+                    self.max_email_length = 256
+                    self.min_password_length = 6
+                    self.max_password_length = 32
 
 R = Resources()
