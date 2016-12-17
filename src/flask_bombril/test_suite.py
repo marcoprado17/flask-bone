@@ -5,24 +5,17 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from jinja2.runtime import Undefined
+import unittest
 
+from utils import get_test_suite_from_test_suites, get_test_suite_from_test_cases
+from jinja_filters import TestCase as JinjaFiltersTestCase
+from form_validators import test_suite as wtforms_test_suite
 
-def assert_defined(value):
-    assert not isinstance(value, Undefined)
-    return value
+test_suite = get_test_suite_from_test_suites([
+    get_test_suite_from_test_cases([JinjaFiltersTestCase]),
+    wtforms_test_suite
+])
 
-
-def assert_callable(value):
-    assert callable(value)
-    return value
-
-
-def call(func, *args, **kwargs):
-    return func(*args, **kwargs)
-
-
-def if_filter(value, condition, else_value):
-    if condition:
-        return value
-    return else_value
+if __name__ == "__main__":
+    runner = unittest.TextTestRunner(verbosity=3)
+    result = runner.run(test_suite)

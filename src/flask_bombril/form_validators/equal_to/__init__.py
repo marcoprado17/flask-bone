@@ -5,7 +5,7 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask_bombril.wtforms.validators.utils import raise_with_stop
+from flask_bombril.form_validators.utils import raise_with_stop
 from flask_bombril.exceptions import InvalidFieldError
 from flask_bombril.r import R
 

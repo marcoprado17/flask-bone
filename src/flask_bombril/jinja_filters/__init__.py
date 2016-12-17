@@ -5,3 +5,5 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
+from filters import assert_defined, assert_callable, call, if_filter
+from test_case import TestCase

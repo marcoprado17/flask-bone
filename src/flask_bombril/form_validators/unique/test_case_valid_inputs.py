@@ -6,7 +6,7 @@
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
 from unittest import TestCase as BaseTestCase
-from flask_bombril.wtforms.validators.unique.forms import MockForm
+from flask_bombril.form_validators.unique.forms import MockForm
 from app_contexts.unit_test_app import unit_test_app as app
 from src.extensions import db
 
