@@ -5,8 +5,10 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask import g
 
-class RegisterData:
+class EmailManager:
     def __init__(self):
-        self.form = g.form
+        pass
+
+    def send_register_email(self):
+        pass

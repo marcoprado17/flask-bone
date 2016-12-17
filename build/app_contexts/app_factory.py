@@ -79,7 +79,7 @@ def create_app():
     #
     # Registering lightly route dependent components context_processors
     # ==================================================================================================================
-    from blueprints.components.lightly_route_dependent.navbar.data import NavbarData
+    from blueprints.components.lightly_route_dependent.navbar.data_provider import NavbarData
 
     @app.context_processor
     def _():

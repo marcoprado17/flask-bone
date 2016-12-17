@@ -9,7 +9,7 @@ from unittest import TestCase as BaseTestCase
 from flask_bombril.form_validators.unique.forms import MockForm, MockFormCustomMessage, \
     MockFormCustomCallableMessage, MockFormStopTrue, MockFormStopFalse
 from flask_bombril.r import R
-from flask_bombril.form_validators.utils import User
+from flask_bombril.form_validators.utils import TempUser
 from app_contexts.unit_test_app import unit_test_app as app
 from extensions import db
 
@@ -22,7 +22,7 @@ class TestCaseInvalidInputs(BaseTestCase):
         with app.app_context():
             db.drop_all()
             db.create_all()
-            db.session.add(User(email=email))
+            db.session.add(TempUser(email=email))
             db.session.commit()
 
     @classmethod

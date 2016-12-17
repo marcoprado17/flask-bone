@@ -10,7 +10,7 @@ from flask_bombril.r import R
 from extensions import db
 
 
-class User(db.Model):
+class TempUser(db.Model):
     email = db.Column(db.String(), primary_key=True, unique=True)
 
 

@@ -79,12 +79,12 @@ def create_app():
     #
     # Registering lightly route dependent components context_processors
     # ==================================================================================================================
-    from blueprints.components.lightly_route_dependent.navbar.data import NavbarData
+    from blueprints.components.lightly_route_dependent.navbar.data_provider import navbar_data_provider
 
     @app.context_processor
     def _():
         return dict(
-            get_navbar_data=lambda: NavbarData(),
+            get_navbar_data=lambda: navbar_data_provider.get_data(),
         )
     # ==================================================================================================================
     #
