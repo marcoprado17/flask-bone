@@ -5,23 +5,8 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from jinja2.runtime import Undefined
+from flask import Blueprint
 
-def assert_defined(value):
-    assert not isinstance(value, Undefined)
-    return value
+debug_blueprint = Blueprint("debug", __name__, static_folder="static", template_folder="templates")
 
-
-def assert_callable(value):
-    assert callable(value)
-    return value
-
-
-def call(func, *args, **kwargs):
-    return func(*args, **kwargs)
-
-
-def if_filter(value, condition, else_value=""):
-    if condition:
-        return value
-    return else_value
+import views

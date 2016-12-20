@@ -5,23 +5,11 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from jinja2.runtime import Undefined
+from blueprints.routers.debug import debug_blueprint
+from extensions import db
 
-def assert_defined(value):
-    assert not isinstance(value, Undefined)
-    return value
-
-
-def assert_callable(value):
-    assert callable(value)
-    return value
-
-
-def call(func, *args, **kwargs):
-    return func(*args, **kwargs)
-
-
-def if_filter(value, condition, else_value=""):
-    if condition:
-        return value
-    return else_value
+@debug_blueprint.route("/db/restart")
+def restart_db():
+    db.drop_all()
+    db.create_all()
+    return "Db restarted"

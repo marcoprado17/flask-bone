@@ -4,7 +4,7 @@
 {# Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]                                                    #}
 {# ================================================================================================================== #}
 {% extends "base/base.html" %}
-{% import "macros/unlabeled_form_fields.html" as unlabeled_form_fields %}
+{% import "macros/form_fields.html" as form_fields with context %}
 {% set data = get_register_index_data|assert_defined|assert_callable|call %}
 {% block title %}
     {{ R.string.register.title }}
@@ -16,11 +16,13 @@
             <div class="panel-heading">{{ R.string.register.title }}</div>
             <div class="panel-body">
                 <form action="{{ url_for("register.index") }}" method="post">
-                    {{ unlabeled_form_fields.string_field(data.form.email) }}
-                    {{ unlabeled_form_fields.password_field(data.form.password) }}
-                    {{ unlabeled_form_fields.password_field(data.form.password_confirmation) }}
-                    {{ unlabeled_form_fields.submit(data.form.submit) }}
-                    <a class="btn-wrap" href="#">{{ R.string.register.already_has_account }}</a>
+                    {{ data.form.csrf_token }}
+                    {{ form_fields.string_field(field=data.form.email, max_length=R.dimen.models.user.email_max_length) }}
+                    {{ form_fields.password_field(field=data.form.password, max_length=R.dimen.models.user.max_password_length) }}
+                    {{ form_fields.password_field(field=data.form.password_confirmation, max_length=R.dimen.models.user.max_password_length) }}
+                    {{ form_fields.submit(field=data.form.submit) }}
+                    <a id="already-has-account-link" class="btn-wrap"
+                       href="#">{{ R.string.register.already_has_account }}</a>
                 </form>
             </div>
         </div>

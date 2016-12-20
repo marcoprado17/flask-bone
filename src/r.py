@@ -70,6 +70,9 @@ class Resources:
             self.register = self.__Register()
             self.models = self.__Models()
 
+            self.default_password_field_max_length = 256
+            self.default_string_field_max_length = 1024
+
         class __Navbar:
             def __init__(self):
                 self.example = 42
@@ -84,8 +87,8 @@ class Resources:
 
             class __User:
                 def __init__(self):
-                    self.max_email_length = 256
-                    self.min_password_length = 6
-                    self.max_password_length = 32
+                    self.email_max_length = 256
+                    self.password_min_length = 6
+                    self.password_max_length = 32
 
 R = Resources()

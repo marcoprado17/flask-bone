@@ -6475,7 +6475,7 @@ Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
     max-width: 360px;
     margin-left: auto;
     margin-right: auto; }
-  .__register__.__index__ a {
+  .__register__.__index__ #already-has-account-link {
     float: right; }
 
 /*

@@ -61,6 +61,9 @@ def create_app():
     app.register_blueprint(home_blueprint, url_prefix="/home")
     from blueprints.routers.register import register_blueprint
     app.register_blueprint(register_blueprint, url_prefix="/cadastrar")
+    if app.config["DEBUG"]:
+        from blueprints.routers.debug import debug_blueprint
+        app.register_blueprint(debug_blueprint, url_prefix="/debug")
     #
     # Wrappers
     #
@@ -97,7 +100,7 @@ def create_app():
     def _():
         return dict(
             get_navbar_data=lambda: navbar_data_provider.get_data(),
-            R = R,
+            R=R,
         )
     # ==================================================================================================================
     #

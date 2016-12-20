@@ -9,14 +9,14 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from unique import Unique
 from flask_bombril.r import R
-from flask_bombril.form_validators.utils import AlwaysError, TempUser
+from flask_bombril.form_validators.utils import AlwaysError, TestUser
 
 
 class MockForm(FlaskForm):
     email = StringField(validators=[
         Unique(
-            model=TempUser,
-            field=TempUser.email
+            model=TestUser,
+            field=TestUser.email
         )
     ])
 
@@ -24,8 +24,8 @@ class MockForm(FlaskForm):
 class MockFormCustomMessage(FlaskForm):
     email = StringField(validators=[
         Unique(
-            model=TempUser,
-            field=TempUser.email,
+            model=TestUser,
+            field=TestUser.email,
             message=R.string.validators.email_already_registered
         )
     ])
@@ -34,8 +34,8 @@ class MockFormCustomMessage(FlaskForm):
 class MockFormCustomCallableMessage(FlaskForm):
     email = StringField(validators=[
         Unique(
-            model=TempUser,
-            field=TempUser.email,
+            model=TestUser,
+            field=TestUser.email,
             message=lambda: R.string.validators.email_already_registered
         )
     ])
@@ -44,8 +44,8 @@ class MockFormCustomCallableMessage(FlaskForm):
 class MockFormStopTrue(FlaskForm):
     email = StringField(validators=[
         Unique(
-            model=TempUser,
-            field=TempUser.email,
+            model=TestUser,
+            field=TestUser.email,
             stop=True
         ),
         AlwaysError()
@@ -55,8 +55,8 @@ class MockFormStopTrue(FlaskForm):
 class MockFormStopFalse(FlaskForm):
     email = StringField(validators=[
         Unique(
-            model=TempUser,
-            field=TempUser.email,
+            model=TestUser,
+            field=TestUser.email,
             stop=False
         ),
         AlwaysError()

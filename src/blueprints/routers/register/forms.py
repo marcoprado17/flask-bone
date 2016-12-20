@@ -22,18 +22,18 @@ class RegisterForm(FlaskForm):
             EmailFormat(),
             Unique(model=User, field=User.email,
                    message=lambda: R.string.register.email_already_registered % dict(href=url_for("home.index"))),
-            Length(max_length=R.dimen.models.user.max_email_length)
+            Length(max_length=R.dimen.models.user.email_max_length)
         ])
     password = PasswordField(
         R.string.register.password_label,
         validators=[
             Required(),
             Length(
-                min_length=R.dimen.models.user.min_password_length,
-                max_length=R.dimen.models.user.max_password_length,
+                min_length=R.dimen.models.user.password_min_length,
+                max_length=R.dimen.models.user.password_max_length,
                 message=R.string.register.password_length % dict(
-                    min_length=R.dimen.models.user.min_password_length,
-                    max_length=R.dimen.models.user.max_password_length
+                    min_length=R.dimen.models.user.password_min_length,
+                    max_length=R.dimen.models.user.password_max_length
                 )
             ),
             EqualTo("password_confirmation", message=R.string.register.password_mismatch)
