@@ -9,7 +9,7 @@ var cleanCSS = require("gulp-clean-css");
 var rename = require("gulp-rename");
 var uglify = require("gulp-uglify");
 var runSequence = require("run-sequence");
-var replace = require("gulp-string-replace");
+var replace = require("gulp-replace");
 
 gulp.task("watch", function () {
     gulp.watch("src/**/*.scss", ["make_css_bundle"]);
@@ -74,8 +74,6 @@ gulp.task("copy_html_files_to_build_dir", function () {
 
 gulp.task("copy_py_files_to_build_dir", function () {
     return gulp.src(["src/**/*.py"])
-        .pipe(replace(/from\s+src/g, "from build"))
-        .pipe(replace(/import\s+src/g, "import build"))
         .pipe(gulp.dest("build"));
 });
 

@@ -25,10 +25,10 @@
     "gulp-print": "^2.0.1",
     "gulp-remove-code": "^1.0.2",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-sass": "^3.0.0",
     "gulp-shell": "^0.5.2",
     "gulp-sourcemaps": "^1.9.1",
-    "gulp-string-replace": "^0.3.0",
     "gulp-uglify": "^2.0.0",
     "run-sequence": "^1.2.2"
   }
