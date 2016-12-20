@@ -13,6 +13,7 @@
             <path value="file://$PROJECT_DIR$/src/blueprints/routers/register/static" />
             <path value="file://$PROJECT_DIR$/src/blueprints/components/lightly_route_dependent/navbar/static" />
             <path value="file://$PROJECT_DIR$/src/blueprints/routers/home/static" />
+            <path value="file://$PROJECT_DIR$/src/macros/static" />
           </resourceRoots>
         </entryData>
       </entry>

@@ -5,8 +5,10 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask import Blueprint
 
-home_blueprint = Blueprint("home", __name__, static_folder="static", template_folder="templates")
+class EmailManager:
+    def __init__(self):
+        pass
 
-import views
+    def send_register_email(self):
+        pass

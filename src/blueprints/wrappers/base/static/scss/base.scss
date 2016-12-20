@@ -5,17 +5,21 @@ The MIT License (MIT)
 Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 ========================================================================================================================
 */
-.__register__.__index__ {
-  margin-top: auto;
-  margin-bottom: auto;
+$page-header-title-margin-top: 0;
+$form-panel-md-width: 360px;
 
-  .panel {
-    max-width: $form-panel-md-width;
-    margin-left: auto;
-    margin-right: auto;
+$label-font-size: 12px;
+$label-margin-bottom: 2px;
+
+.__base__ {
+  height: 100%;
+
+  .page-header.title {
+    margin-top: $page-header-title-margin-top;
   }
 
-  a {
-    float: right;
+  label {
+    font-size: $label-font-size;
+    margin-bottom: $label-margin-bottom;
   }
 }

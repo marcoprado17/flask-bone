@@ -15,6 +15,7 @@
         <option value="$MODULE_DIR$/src/blueprints/wrappers/base/templates" />
         <option value="$MODULE_DIR$/src/blueprints/components/lightly_route_dependent/navbar/templates" />
         <option value="$MODULE_DIR$/src/blueprints/routers/register/templates" />
+        <option value="$MODULE_DIR$/src/macros/templates" />
       </list>
     </option>
   </component>

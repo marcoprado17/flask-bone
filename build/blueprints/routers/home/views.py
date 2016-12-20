@@ -7,7 +7,7 @@
 # ======================================================================================================================
 from flask import render_template, g, current_app as app
 from r import R
-from __init__ import home_blueprint
+from blueprints.routers.home import home_blueprint
 
 
 @home_blueprint.route("/")

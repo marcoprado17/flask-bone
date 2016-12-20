@@ -5,6 +5,12 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
+import sys
+
+if sys.version_info.major < 3:
+    reload(sys)
+sys.setdefaultencoding('utf8')
+
 from flask import Flask, redirect
 from configs import default_app_config
 from configs.instance import instance_app_config
@@ -60,6 +66,11 @@ def create_app():
     #
     from blueprints.wrappers.base import base_blueprint
     app.register_blueprint(base_blueprint, url_prefix="/base")
+    #
+    # Macros
+    #
+    from macros import macros_blueprint
+    app.register_blueprint(macros_blueprint)
     # ==================================================================================================================
     #
     #
@@ -80,11 +91,13 @@ def create_app():
     # Registering lightly route dependent components context_processors
     # ==================================================================================================================
     from blueprints.components.lightly_route_dependent.navbar.data_provider import navbar_data_provider
+    from r import R
 
     @app.context_processor
     def _():
         return dict(
             get_navbar_data=lambda: navbar_data_provider.get_data(),
+            R = R,
         )
     # ==================================================================================================================
     #

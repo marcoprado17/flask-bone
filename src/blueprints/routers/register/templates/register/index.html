@@ -4,9 +4,26 @@
 {# Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]                                                    #}
 {# ================================================================================================================== #}
 {% extends "base/base.html" %}
+{% import "macros/unlabeled_form_fields.html" as unlabeled_form_fields %}
 {% set data = get_register_index_data|assert_defined|assert_callable|call %}
+{% block title %}
+    {{ R.string.register.title }}
+{% endblock %}
 {% block content %}
-    <div class="__register__ __index__">
-        <p>Hello World!</p>
+    <div class="vertical-fluid"></div>
+    <div class="__register__ __index__ container hidden">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ R.string.register.title }}</div>
+            <div class="panel-body">
+                <form action="{{ url_for("register.index") }}" method="post">
+                    {{ unlabeled_form_fields.string_field(data.form.email) }}
+                    {{ unlabeled_form_fields.password_field(data.form.password) }}
+                    {{ unlabeled_form_fields.password_field(data.form.password_confirmation) }}
+                    {{ unlabeled_form_fields.submit(data.form.submit) }}
+                    <a class="btn-wrap" href="#">{{ R.string.register.already_has_account }}</a>
+                </form>
+            </div>
+        </div>
     </div>
+    <div class="vertical-fluid"></div>
 {% endblock %}

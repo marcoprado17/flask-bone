@@ -15,14 +15,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bundle.css') }}">
 </head>
 <body>
-
-{% include "navbar/navbar.html" %}
-
-<div class="container">
+<div class="__base__">
+    {% include "navbar/navbar.html" %}
     {% block content %}
     {% endblock %}
 </div>
-
 <script type="text/javascript" src="{{ url_for('static', filename='js/bundle.js') }}"></script>
 {% block scripts %}
 {% endblock %}

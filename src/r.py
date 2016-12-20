@@ -43,6 +43,8 @@ class Resources:
                 self.password_label = "Senha"
                 self.password_confirmation_label = "Confirmação da senha"
                 self.register = "Cadastrar"
+                self.already_has_account = "Já possui conta?"
+                self.title = "Cadastro"
 
     class __Ids:
         def __init__(self):

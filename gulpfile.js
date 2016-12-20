@@ -18,17 +18,31 @@ gulp.task("watch", function () {
     gulp.watch("build/static/**/*.css", ["refresh_page"]);
     gulp.watch("build/static/**/*.js", ["refresh_page"]);
     gulp.watch("build/static/**/*.html", ["refresh_page"]);
+    gulp.watch("src/**/*.py", function () {
+        delay(750);
+        runSequence("refresh_page");
+    });
 });
 
 gulp.task("make_css_bundle", function () {
-    return gulp.src(["bower_components/bootstrap/dist/css/bootstrap.css", "src/**/*.scss"])
-        .pipe(sass())
+    return gulp.src([
+        "bower_components/bootstrap/dist/css/bootstrap.css",
+        "src/front_bombril/utils.scss",
+        "src/blueprints/wrappers/base/static/scss/base.scss",
+        "src/**/*.scss"
+    ])
         .pipe(concat("bundle.css"))
+        .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest("build/static/css"));
 });
 
 gulp.task("make_js_bundle", function () {
-    return gulp.src(["bower_components/jquery/dist/jquery.js", "bower_components/bootstrap/dist/js/bootstrap.js", "src/**/*.js"])
+    return gulp.src([
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/bootstrap/dist/js/bootstrap.js",
+        "src/front_bombril/utils.js",
+        "src/**/*.js"
+    ])
         .pipe(concat("bundle.js"))
         .pipe(gulp.dest("build/static/js"));
 });
@@ -82,3 +96,9 @@ gulp.task("minify_js_bundle", function () {
         }))
         .pipe(gulp.dest("build/static/js"));
 });
+
+function delay(delayTime) {
+    var releaseTime = (new Date()).getTime() + delayTime;
+    while ((new Date()).getTime() < releaseTime) {
+    }
+}

@@ -12,8 +12,8 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 
 class User(db.Model):
-    email = db.Column(db.String(R.dimen.max_email_char_length), primary_key=True, unique=True)
-    _password = db.Column(db.String(R.dimen.max_password_char_length))
+    email = db.Column(db.String(R.dimen.models.user.max_email_length), primary_key=True, unique=True)
+    _password = db.Column(db.String(R.dimen.models.user.max_password_length))
     email_confirmed = db.Column(db.Boolean, default=False)
 
     @hybrid_property

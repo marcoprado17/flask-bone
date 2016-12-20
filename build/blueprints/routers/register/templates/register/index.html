@@ -4,9 +4,26 @@
 {# Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]                                                    #}
 {# ================================================================================================================== #}
 {% extends "base/base.html" %}
+{% import "macros/labeled_form_fields.html" as form_fields %}
 {% set data = get_register_index_data|assert_defined|assert_callable|call %}
+{% block title %}
+    Cadastro
+{% endblock %}
 {% block content %}
     <div class="__register__ __index__">
-        <p>Hello World!</p>
+        {% import "macros/miscellaneous.html" as miscellaneous %}
+        {{ miscellaneous.page_header("Oiii") }}
+        <div class="panel panel-default">
+            <div class="panel-heading">Cadastro</div>
+            <div class="panel-body">
+                <form action="{{ url_for("register.index") }}" method="post">
+                    {{ form_fields.string_field(data.form.email) }}
+                    {{ form_fields.password_field(data.form.password) }}
+                    {{ form_fields.password_field(data.form.password_confirmation) }}
+                    {{ form_fields.submit(data.form.submit) }}
+                    <a class="btn-wrap" href="#">{{ R.string.register.forgot_password }}</a>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

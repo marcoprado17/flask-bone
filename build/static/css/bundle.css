@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -6426,9 +6427,33 @@ button.close {
     display: none !important; } }
 
 /*# sourceMappingURL=bootstrap.css.map */
+a.btn-wrap {
+  border: 1px;
+  padding: 6px 12px; }
+  a.btn-wrap.btn-lg {
+    padding: 10px 16px; }
+  a.btn-wrap.btn-sm {
+    padding: 5px 10px; }
+  a.btn-wrap.btn-xs {
+    padding: 1px 5px; }
 
-.btn-info {
-  background-color: darkred; }
+html, body {
+  height: 100%; }
+
+/*
+========================================================================================================================
+The MIT License (MIT)
+========================================================================================================================
+Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
+========================================================================================================================
+*/
+.__base__ {
+  height: 100%; }
+  .__base__ .page-header.title {
+    margin-top: 0; }
+  .__base__ label {
+    font-size: 12px;
+    margin-bottom: 2px; }
 
 .__home__.__index__ .modal-title {
   color: red; }
@@ -6436,7 +6461,6 @@ button.close {
 .__home__.__index__ h2 {
   color: goldenrod; }
 
-@charset "UTF-8";
 /*
 ========================================================================================================================
 The MIT License (MIT)
@@ -6445,9 +6469,15 @@ Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 ========================================================================================================================
 */
 .__register__.__index__ {
-  color: red; }
+  margin-top: auto;
+  margin-bottom: auto; }
+  .__register__.__index__ .panel {
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto; }
+  .__register__.__index__ a {
+    float: right; }
 
-@charset "UTF-8";
 /*
 ========================================================================================================================
 The MIT License (MIT)
