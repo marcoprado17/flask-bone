@@ -11,7 +11,7 @@ from forms import RegisterForm
 from models import User
 from r import R
 from blueprints.routers.register import register_blueprint
-from emails import email_manager
+from email_blueprint import email_manager
 from extensions import db
 
 
@@ -35,5 +35,9 @@ def index():
         )
         db.session.commit()
 
-        email_manager.send_register_email()
+        email_manager.send_register_email(g.form.email.data)
         return redirect(url_for("home.index"))
+
+@register_blueprint.route("/email-confirmado", methods=["GET"])
+def email_confirmed():
+    return "Email confirmado."

@@ -17,10 +17,11 @@ class Resources:
         def __init__(self):
             self.navbar = self.__Navbar()
             self.register = self.__Register()
+            self.email = self.__Email()
+            self.micro_blog = "Micro Blog"
 
         class __Navbar:
             def __init__(self):
-                self.micro_blog = "Micro Blog"
                 self.home = "Home"
                 self.posts = "Posts"
                 self.add_post = "Adicionar Post"
@@ -45,6 +46,17 @@ class Resources:
                 self.register = "Cadastrar"
                 self.already_has_account = "Já possui conta?"
                 self.title = "Cadastro"
+
+        class __Email:
+            def __init__(self):
+                self.register = self.__Register()
+
+            class __Register:
+                def __init__(self):
+                    self.welcome = "Olá!"
+                    self.confirm_email = "Deseja utilizar <u>%(email)s</u> como seu email principal na %(title)s?"
+                    self.confirm_button_text = "Sim, desejo utilizar este email"
+                    self.subject = "Confirme seu endereço de e-mail | %(title)s"
 
     class __Ids:
         def __init__(self):
@@ -90,5 +102,6 @@ class Resources:
                     self.email_max_length = 256
                     self.password_min_length = 6
                     self.password_max_length = 32
+
 
 R = Resources()

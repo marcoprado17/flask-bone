@@ -12,6 +12,7 @@ if sys.version_info.major < 3:
 sys.setdefaultencoding('utf8')
 
 from flask import Flask, redirect
+
 from configs import default_app_config
 from configs.instance import instance_app_config
 from configs.instance import unit_test_app_config
@@ -33,6 +34,8 @@ def __create_app(configs):
     bcrypt.init_app(app)
     from extensions import db
     db.init_app(app)
+    from extensions import mail
+    mail.init_app(app)
 
     return app
 
@@ -74,6 +77,11 @@ def create_app():
     #
     from macros import macros_blueprint
     app.register_blueprint(macros_blueprint)
+    #
+    # Email
+    #
+    from email_blueprint import email_blueprint
+    app.register_blueprint(email_blueprint)
     # ==================================================================================================================
     #
     #
@@ -93,7 +101,7 @@ def create_app():
     #
     # Registering lightly route dependent components context_processors
     # ==================================================================================================================
-    from blueprints.components.lightly_route_dependent.navbar.data_provider import navbar_data_provider
+    from blueprints.components.lightly_route_dependent.navbar.navbar_data_provider import navbar_data_provider
     from r import R
 
     @app.context_processor

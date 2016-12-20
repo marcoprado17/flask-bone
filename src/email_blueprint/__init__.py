@@ -5,10 +5,10 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
+from flask import Blueprint
 
-class EmailManager:
-    def __init__(self):
-        pass
+from email_manager import EmailManager
 
-    def send_register_email(self):
-        pass
+
+email_blueprint = Blueprint("email", __name__, static_folder="static", template_folder="templates")
+email_manager = EmailManager()

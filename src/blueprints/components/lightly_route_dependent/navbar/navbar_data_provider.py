@@ -16,7 +16,7 @@ class NavbarDataProvider:
 
     def get_data(self):
         return dict(
-            title=R.string.navbar.micro_blog,
+            title=R.string.micro_blog,
             left_items=[
                 dict(
                     text=R.string.navbar.home,

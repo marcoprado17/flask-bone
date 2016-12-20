@@ -5,6 +5,18 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from email_manager import EmailManager
+from flask import g
 
-email_manager = EmailManager()
+
+class EmailRegisterDataProvider:
+    def __init__(self):
+        pass
+
+    def get_data(self):
+        return dict(
+            confirm_url=g.confirm_url,
+            email=g.email
+        )
+
+
+email_register_data_provider = EmailRegisterDataProvider()

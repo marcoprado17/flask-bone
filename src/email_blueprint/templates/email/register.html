@@ -1,0 +1,11 @@
+{# ================================================================================================================== #}
+{# The MIT License (MIT)                                                                                              #}
+{# ================================================================================================================== #}
+{# Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]                                                    #}
+{# ================================================================================================================== #}
+{% set data = get_email_register_data|assert_defined|assert_callable|call %}
+<p>{{ R.string.email.register.welcome }}</p>
+<p>{{ R.string.email.register.confirm_email|format(email=data.email, title=R.string.micro_blog)|safe }}</p>
+<a href="{{data.confirm_url}}">
+  <button>{{ R.string.email.register.confirm_button_text }}</button>
+</a>

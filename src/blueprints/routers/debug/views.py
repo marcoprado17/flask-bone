@@ -12,4 +12,4 @@ from extensions import db
 def restart_db():
     db.drop_all()
     db.create_all()
-    return "Db restarted"
+    return "Db reiniciado."
