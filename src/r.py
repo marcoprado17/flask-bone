@@ -19,6 +19,7 @@ class Resources:
             self.register = self.__Register()
             self.email = self.__Email()
             self.micro_blog = "Micro Blog"
+            self.temp_error_html = "Ocorreu um erro inesperado em nossos servidores, nossa equipe técnica resolverá o problema assim que possível. Clique <a href=%(href)s>aqui</a> para voltar à pagina inicial."
 
         class __Navbar:
             def __init__(self):

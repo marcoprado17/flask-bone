@@ -11,12 +11,13 @@ if sys.version_info.major < 3:
     reload(sys)
 sys.setdefaultencoding('utf8')
 
-from flask import Flask, redirect
+from flask import Flask, redirect, request, url_for
 
 from configs import default_app_config
 from configs.instance import instance_app_config
 from configs.instance import unit_test_app_config
 
+from extensions import db
 
 def __create_app(configs):
     static_folder = None
@@ -128,6 +129,25 @@ def create_app():
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
+    # ==================================================================================================================
+    #
+    #
+    #
+    #
+    # Registering error handler
+    # ==================================================================================================================
+    @app.errorhandler(500)
+    def handle_error(error):
+        db.session.rollback()
+        app.logger.error("url: " + request.url)
+        if request.method == "POST" and len(request.form) > 0:
+            form_fields = dict(request.form)
+            if "password" in form_fields:
+                form_fields["password"] = "******"
+            if "password_confirmation" in form_fields:
+                form_fields["password_confirmation"] = "******"
+            app.logger.error("form_fields: " + str(form_fields))
+        return R.string.temp_error_html % dict(href=url_for("home.index")), 500
 
     return app
 
