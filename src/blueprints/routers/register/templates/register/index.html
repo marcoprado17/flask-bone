@@ -5,6 +5,7 @@
 {# ================================================================================================================== #}
 {% extends "base/base.html" %}
 {% import "macros/form_fields.html" as form_fields with context %}
+{% import "macros/miscellaneous.html" as miscellaneous with context %}
 {% set data = get_register_index_data|assert_defined|assert_callable|call %}
 {% block title %}
     {{ R.string.register.title }}
@@ -15,6 +16,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{ R.string.register.title }}</div>
             <div class="panel-body">
+                {{ miscellaneous.static_flash_messages() }}
                 <form action="{{ url_for("register.index") }}" method="post">
                     {{ data.form.csrf_token }}
                     {{ form_fields.string_field(field=data.form.email, max_length=R.dimen.models.user.email_max_length) }}

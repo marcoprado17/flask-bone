@@ -5,8 +5,12 @@
 # ======================================================================================================================
 # Copyright (c) 2016 [Marco Aurélio Prado - marco.pdsv@gmail.com]
 # ======================================================================================================================
-from flask import render_template, g, request, redirect, url_for
+from smtplib import SMTPException
 
+from flask import render_template, g, request, redirect, url_for, flash, current_app
+from sqlalchemy.exc import SQLAlchemyError
+
+from flask_bombril.log import log_handled_exception
 from forms import RegisterForm
 from models import User
 from r import R
@@ -25,18 +29,31 @@ def index():
         return render_template("register/index.html")
     # POST
     else:
-        if not g.form.validate_on_submit():
+        try:
+            if not g.form.validate_on_submit():
+                return render_template("register/index.html")
+
+            db.session.add(
+                User(
+                    email=g.form.email.data
+                )
+            )
+
+            email_manager.send_register_email(g.form.email.data)
+
+            db.session.commit()
+            return redirect(url_for("home.index"))
+        except SQLAlchemyError:
+            db.session.rollback()
+            log_handled_exception(SQLAlchemyError)
+            flash(R.string.db_access_error, R.string.category % dict(type=R.string.static, level=R.string.error))
+            return render_template("register/index.html")
+        except SMTPException:
+            db.session.rollback()
+            log_handled_exception(SMTPException)
+            flash(R.string.send_email_error, R.string.category % dict(type=R.string.static, level=R.string.error))
             return render_template("register/index.html")
 
-        db.session.add(
-            User(
-                email=g.form.email.data
-            )
-        )
-        db.session.commit()
-
-        email_manager.send_register_email(g.form.email.data)
-        return redirect(url_for("home.index"))
 
 @register_blueprint.route("/email-confirmado", methods=["GET"])
 def email_confirmed():

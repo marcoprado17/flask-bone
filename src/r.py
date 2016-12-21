@@ -20,6 +20,15 @@ class Resources:
             self.email = self.__Email()
             self.micro_blog = "Micro Blog"
             self.temp_error_html = "Ocorreu um erro inesperado em nossos servidores, nossa equipe técnica resolverá o problema assim que possível. Clique <a href=%(href)s>aqui</a> para voltar à pagina inicial."
+            self.db_access_error = "Ocorreu um erro ao acessar o banco de dados. Tente novamente."
+            self.send_email_error = "Ocorreu um erro ao enviar o email. Tente novamente."
+            self.static = "static"
+            self.toast = "toast"
+            self.success = "success"
+            self.info = "info"
+            self.warning = "warning"
+            self.error = "error"
+            self.category = "%(type)s-%(level)s"
 
         class __Navbar:
             def __init__(self):

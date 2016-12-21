@@ -19,6 +19,8 @@ from configs.instance import unit_test_app_config
 
 from extensions import db
 
+from flask_bombril.log import log_request
+
 def __create_app(configs):
     static_folder = None
     for config in configs:
@@ -48,6 +50,8 @@ def create_app():
     def home_redirect():
         return redirect("home")
 
+    # ==================================================================================================================
+    #
     #
     #
     #
@@ -83,6 +87,7 @@ def create_app():
     #
     from email_blueprint import email_blueprint
     app.register_blueprint(email_blueprint)
+
     # ==================================================================================================================
     #
     #
@@ -90,11 +95,15 @@ def create_app():
     #
     # Registering jinja filters
     # ==================================================================================================================
-    from flask_bombril.jinja_filters import assert_defined, assert_callable, call, if_filter
+    from flask_bombril.jinja_filters import assert_defined, assert_callable, call, if_filter, is_static, is_toast, get_level
     app.jinja_env.filters['assert_defined'] = assert_defined
     app.jinja_env.filters['assert_callable'] = assert_callable
     app.jinja_env.filters['call'] = call
     app.jinja_env.filters['if'] = if_filter
+    app.jinja_env.filters['is_static'] = is_static
+    app.jinja_env.filters['is_toast'] = is_toast
+    app.jinja_env.filters['get_level'] = get_level
+
     # ==================================================================================================================
     #
     #
@@ -111,6 +120,7 @@ def create_app():
             get_navbar_data=lambda: navbar_data_provider.get_data(),
             R=R,
         )
+
     # ==================================================================================================================
     #
     #
@@ -129,24 +139,18 @@ def create_app():
     formatter = logging.Formatter(app.config['LOGGING_FORMAT'])
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
+
     # ==================================================================================================================
     #
     #
     #
     #
-    # Registering error handler
+    # Registering 500 error handler
     # ==================================================================================================================
     @app.errorhandler(500)
     def handle_error(error):
         db.session.rollback()
-        app.logger.error("url: " + request.url)
-        if request.method == "POST" and len(request.form) > 0:
-            form_fields = dict(request.form)
-            if "password" in form_fields:
-                form_fields["password"] = "******"
-            if "password_confirmation" in form_fields:
-                form_fields["password_confirmation"] = "******"
-            app.logger.error("form_fields: " + str(form_fields))
+        log_request(app.logger.error)
         return R.string.temp_error_html % dict(href=url_for("home.index")), 500
 
     return app
